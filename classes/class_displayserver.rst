@@ -1282,11 +1282,11 @@ Window view:
 
 OpenGL context (only with the GL Compatibility renderer):
 
-- Windows: ``HGLRC`` for the window.
+- Windows: ``HGLRC`` for the window (native GL), or ``EGLContext`` for the window (ANGLE).
 
 - Linux: ``GLXContext*`` for the window.
 
-- macOS: ``NSOpenGLContext*`` for the window.
+- macOS: ``NSOpenGLContext*`` for the window (native GL), or ``EGLContext`` for the window (ANGLE).
 
 - Android: ``EGLContext`` for the window.
 
@@ -2557,7 +2557,7 @@ Returns the composition string contained within the `Input Method Editor <https:
 
 Returns ``true`` if OS is using dark mode.
 
-\ **Note:** This method is implemented on macOS, Windows and Linux (X11).
+\ **Note:** This method is implemented on Android, iOS, macOS, Windows, and Linux (X11).
 
 .. rst-class:: classref-item-separator
 
@@ -2571,7 +2571,7 @@ Returns ``true`` if OS is using dark mode.
 
 Returns ``true`` if OS supports dark mode.
 
-\ **Note:** This method is implemented on macOS, Windows and Linux (X11).
+\ **Note:** This method is implemented on Android, iOS, macOS, Windows, and Linux (X11).
 
 .. rst-class:: classref-item-separator
 

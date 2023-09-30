@@ -133,6 +133,8 @@ Properties
    +---------------------------------------------------+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+--------------------------------------------------------------------------------------------------+
    | :ref:`int<class_int>`                             | :ref:`audio/video/video_delay_compensation_ms<class_ProjectSettings_property_audio/video/video_delay_compensation_ms>`                                                                                     | ``0``                                                                                            |
    +---------------------------------------------------+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+--------------------------------------------------------------------------------------------------+
+   | :ref:`bool<class_bool>`                           | :ref:`collada/use_ambient<class_ProjectSettings_property_collada/use_ambient>`                                                                                                                             | ``false``                                                                                        |
+   +---------------------------------------------------+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+--------------------------------------------------------------------------------------------------+
    | :ref:`int<class_int>`                             | :ref:`compression/formats/gzip/compression_level<class_ProjectSettings_property_compression/formats/gzip/compression_level>`                                                                               | ``-1``                                                                                           |
    +---------------------------------------------------+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+--------------------------------------------------------------------------------------------------+
    | :ref:`int<class_int>`                             | :ref:`compression/formats/zlib/compression_level<class_ProjectSettings_property_compression/formats/zlib/compression_level>`                                                                               | ``-1``                                                                                           |
@@ -178,6 +180,8 @@ Properties
    | :ref:`int<class_int>`                             | :ref:`debug/gdscript/warnings/incompatible_ternary<class_ProjectSettings_property_debug/gdscript/warnings/incompatible_ternary>`                                                                           | ``1``                                                                                            |
    +---------------------------------------------------+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+--------------------------------------------------------------------------------------------------+
    | :ref:`int<class_int>`                             | :ref:`debug/gdscript/warnings/inference_on_variant<class_ProjectSettings_property_debug/gdscript/warnings/inference_on_variant>`                                                                           | ``2``                                                                                            |
+   +---------------------------------------------------+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+--------------------------------------------------------------------------------------------------+
+   | :ref:`int<class_int>`                             | :ref:`debug/gdscript/warnings/inferred_declaration<class_ProjectSettings_property_debug/gdscript/warnings/inferred_declaration>`                                                                           | ``0``                                                                                            |
    +---------------------------------------------------+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+--------------------------------------------------------------------------------------------------+
    | :ref:`int<class_int>`                             | :ref:`debug/gdscript/warnings/int_as_enum_without_cast<class_ProjectSettings_property_debug/gdscript/warnings/int_as_enum_without_cast>`                                                                   | ``1``                                                                                            |
    +---------------------------------------------------+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+--------------------------------------------------------------------------------------------------+
@@ -1519,6 +1523,10 @@ Properties
    +---------------------------------------------------+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+--------------------------------------------------------------------------------------------------+
    | :ref:`int<class_int>`                             | :ref:`xr/openxr/form_factor<class_ProjectSettings_property_xr/openxr/form_factor>`                                                                                                                         | ``"0"``                                                                                          |
    +---------------------------------------------------+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+--------------------------------------------------------------------------------------------------+
+   | :ref:`bool<class_bool>`                           | :ref:`xr/openxr/foveation_dynamic<class_ProjectSettings_property_xr/openxr/foveation_dynamic>`                                                                                                             | ``false``                                                                                        |
+   +---------------------------------------------------+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+--------------------------------------------------------------------------------------------------+
+   | :ref:`int<class_int>`                             | :ref:`xr/openxr/foveation_level<class_ProjectSettings_property_xr/openxr/foveation_level>`                                                                                                                 | ``"0"``                                                                                          |
+   +---------------------------------------------------+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+--------------------------------------------------------------------------------------------------+
    | :ref:`int<class_int>`                             | :ref:`xr/openxr/reference_space<class_ProjectSettings_property_xr/openxr/reference_space>`                                                                                                                 | ``"1"``                                                                                          |
    +---------------------------------------------------+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+--------------------------------------------------------------------------------------------------+
    | :ref:`bool<class_bool>`                           | :ref:`xr/openxr/startup_alert<class_ProjectSettings_property_xr/openxr/startup_alert>`                                                                                                                     | ``true``                                                                                         |
@@ -2184,6 +2192,18 @@ Setting to hardcode audio delay when playing video. Best to leave this untouched
 
 ----
 
+.. _class_ProjectSettings_property_collada/use_ambient:
+
+.. rst-class:: classref-property
+
+:ref:`bool<class_bool>` **collada/use_ambient** = ``false``
+
+If ``true``, ambient lights will be imported from COLLADA models as :ref:`DirectionalLight3D<class_DirectionalLight3D>`. If ``false``, ambient lights will be ignored.
+
+.. rst-class:: classref-item-separator
+
+----
+
 .. _class_ProjectSettings_property_compression/formats/gzip/compression_level:
 
 .. rst-class:: classref-property
@@ -2455,6 +2475,20 @@ When set to ``warn`` or ``error``, produces a warning or an error respectively w
 :ref:`int<class_int>` **debug/gdscript/warnings/inference_on_variant** = ``2``
 
 When set to ``warn`` or ``error``, produces a warning or an error respectively when a static inferred type uses a :ref:`Variant<class_Variant>` as initial value, which makes the static type to also be Variant.
+
+.. rst-class:: classref-item-separator
+
+----
+
+.. _class_ProjectSettings_property_debug/gdscript/warnings/inferred_declaration:
+
+.. rst-class:: classref-property
+
+:ref:`int<class_int>` **debug/gdscript/warnings/inferred_declaration** = ``0``
+
+When set to ``warn`` or ``error``, produces a warning or an error respectively when a variable, constant, or parameter has an implicitly inferred static type.
+
+\ **Note:** This warning is recommended *in addition* to :ref:`debug/gdscript/warnings/untyped_declaration<class_ProjectSettings_property_debug/gdscript/warnings/untyped_declaration>` if you want to always specify the type explicitly. Having ``INFERRED_DECLARATION`` warning level higher than ``UNTYPED_DECLARATION`` warning level makes little sense and is not recommended.
 
 .. rst-class:: classref-item-separator
 
@@ -8750,12 +8784,12 @@ The default gravity strength in 3D (in meters per second squared).
  .. code-tab:: gdscript
 
     # Set the default gravity strength to 9.8.
-    PhysicsServer3D.area_set_param(get_viewport().find_world().space, PhysicsServer3D.AREA_PARAM_GRAVITY, 9.8)
+    PhysicsServer3D.area_set_param(get_viewport().find_world_3d().space, PhysicsServer3D.AREA_PARAM_GRAVITY, 9.8)
 
  .. code-tab:: csharp
 
     // Set the default gravity strength to 9.8.
-    PhysicsServer3D.AreaSetParam(GetViewport().FindWorld().Space, PhysicsServer3D.AreaParameter.Gravity, 9.8);
+    PhysicsServer3D.AreaSetParam(GetViewport().FindWorld3D().Space, PhysicsServer3D.AreaParameter.Gravity, 9.8);
 
 
 
@@ -8779,12 +8813,12 @@ The default gravity direction in 3D.
  .. code-tab:: gdscript
 
     # Set the default gravity direction to `Vector3(0, -1, 0)`.
-    PhysicsServer3D.area_set_param(get_viewport().find_world().get_space(), PhysicsServer3D.AREA_PARAM_GRAVITY_VECTOR, Vector3.DOWN)
+    PhysicsServer3D.area_set_param(get_viewport().find_world_3d().space, PhysicsServer3D.AREA_PARAM_GRAVITY_VECTOR, Vector3.DOWN)
 
  .. code-tab:: csharp
 
     // Set the default gravity direction to `Vector3(0, -1, 0)`.
-    PhysicsServer3D.AreaSetParam(GetViewport().FindWorld().Space, PhysicsServer3D.AreaParameter.GravityVector, Vector3.Down)
+    PhysicsServer3D.AreaSetParam(GetViewport().FindWorld3D().Space, PhysicsServer3D.AreaParameter.GravityVector, Vector3.Down)
 
 
 
@@ -10246,6 +10280,8 @@ If ``true``, :ref:`OccluderInstance3D<class_OccluderInstance3D>` nodes will be u
 
 \ **Note:** Enabling occlusion culling has a cost on the CPU. Only enable occlusion culling if you actually plan to use it. Large open scenes with few or no objects blocking the view will generally not benefit much from occlusion culling. Large open scenes generally benefit more from mesh LOD and visibility ranges (:ref:`GeometryInstance3D.visibility_range_begin<class_GeometryInstance3D_property_visibility_range_begin>` and :ref:`GeometryInstance3D.visibility_range_end<class_GeometryInstance3D_property_visibility_range_end>`) compared to occlusion culling.
 
+\ **Note:** Due to memory constraints, occlusion culling is not supported by default in Web export templates. It can be enabled by compiling custom Web export templates with ``module_raycast_enabled=yes``.
+
 .. rst-class:: classref-item-separator
 
 ----
@@ -11010,6 +11046,30 @@ Specify how OpenXR should blend in the environment. This is specific to certain 
 :ref:`int<class_int>` **xr/openxr/form_factor** = ``"0"``
 
 Specify whether OpenXR should be configured for an HMD or a hand held device.
+
+.. rst-class:: classref-item-separator
+
+----
+
+.. _class_ProjectSettings_property_xr/openxr/foveation_dynamic:
+
+.. rst-class:: classref-property
+
+:ref:`bool<class_bool>` **xr/openxr/foveation_dynamic** = ``false``
+
+If true and foveation is supported, will automatically adjust foveation level based on framerate up to the level set on ``xr/openxr/foveation_level``.
+
+.. rst-class:: classref-item-separator
+
+----
+
+.. _class_ProjectSettings_property_xr/openxr/foveation_level:
+
+.. rst-class:: classref-property
+
+:ref:`int<class_int>` **xr/openxr/foveation_level** = ``"0"``
+
+Applied foveation level if supported: 0 = off, 1 = low, 2 = medium, 3 = high.
 
 .. rst-class:: classref-item-separator
 
