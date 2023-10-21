@@ -32,6 +32,7 @@ Nodes
     class_animatablebody3d
     class_animatedsprite2d
     class_animatedsprite3d
+    class_animationmixer
     class_animationplayer
     class_animationtree
     class_area2d
@@ -438,6 +439,7 @@ Resources
     class_missingresource
     class_multimesh
     class_navigationmesh
+    class_navigationmeshsourcegeometrydata2d
     class_navigationmeshsourcegeometrydata3d
     class_navigationpolygon
     class_noise
