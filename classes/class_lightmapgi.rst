@@ -49,9 +49,13 @@ Properties
    +---------------------------------------------------------+---------------------------------------------------------------------------------------+------------+
    | :ref:`float<class_float>`                               | :ref:`bias<class_LightmapGI_property_bias>`                                           | ``0.0005`` |
    +---------------------------------------------------------+---------------------------------------------------------------------------------------+------------+
+   | :ref:`float<class_float>`                               | :ref:`bounce_indirect_energy<class_LightmapGI_property_bounce_indirect_energy>`       | ``1.0``    |
+   +---------------------------------------------------------+---------------------------------------------------------------------------------------+------------+
    | :ref:`int<class_int>`                                   | :ref:`bounces<class_LightmapGI_property_bounces>`                                     | ``3``      |
    +---------------------------------------------------------+---------------------------------------------------------------------------------------+------------+
    | :ref:`CameraAttributes<class_CameraAttributes>`         | :ref:`camera_attributes<class_LightmapGI_property_camera_attributes>`                 |            |
+   +---------------------------------------------------------+---------------------------------------------------------------------------------------+------------+
+   | :ref:`float<class_float>`                               | :ref:`denoiser_strength<class_LightmapGI_property_denoiser_strength>`                 | ``0.1``    |
    +---------------------------------------------------------+---------------------------------------------------------------------------------------+------------+
    | :ref:`bool<class_bool>`                                 | :ref:`directional<class_LightmapGI_property_directional>`                             | ``false``  |
    +---------------------------------------------------------+---------------------------------------------------------------------------------------+------------+
@@ -74,6 +78,8 @@ Properties
    | :ref:`BakeQuality<enum_LightmapGI_BakeQuality>`         | :ref:`quality<class_LightmapGI_property_quality>`                                     | ``1``      |
    +---------------------------------------------------------+---------------------------------------------------------------------------------------+------------+
    | :ref:`bool<class_bool>`                                 | :ref:`use_denoiser<class_LightmapGI_property_use_denoiser>`                           | ``true``   |
+   +---------------------------------------------------------+---------------------------------------------------------------------------------------+------------+
+   | :ref:`bool<class_bool>`                                 | :ref:`use_texture_for_bounces<class_LightmapGI_property_use_texture_for_bounces>`     | ``true``   |
    +---------------------------------------------------------+---------------------------------------------------------------------------------------+------------+
 
 .. rst-class:: classref-section-separator
@@ -333,6 +339,25 @@ The bias to use when computing shadows. Increasing :ref:`bias<class_LightmapGI_p
 
 ----
 
+.. _class_LightmapGI_property_bounce_indirect_energy:
+
+.. rst-class:: classref-property
+
+:ref:`float<class_float>` **bounce_indirect_energy** = ``1.0``
+
+.. rst-class:: classref-property-setget
+
+- void **set_bounce_indirect_energy** **(** :ref:`float<class_float>` value **)**
+- :ref:`float<class_float>` **get_bounce_indirect_energy** **(** **)**
+
+The energy multiplier for each bounce. Higher values will make indirect lighting brighter. A value of ``1.0`` represents physically accurate behavior, but higher values can be used to make indirect lighting propagate more visibly when using a low number of bounces. This can be used to speed up bake times by lowering the number of :ref:`bounces<class_LightmapGI_property_bounces>` then increasing :ref:`bounce_indirect_energy<class_LightmapGI_property_bounce_indirect_energy>`.
+
+\ **Note:** :ref:`bounce_indirect_energy<class_LightmapGI_property_bounce_indirect_energy>` only has an effect if :ref:`bounces<class_LightmapGI_property_bounces>` is set to a value greater than or equal to ``1``.
+
+.. rst-class:: classref-item-separator
+
+----
+
 .. _class_LightmapGI_property_bounces:
 
 .. rst-class:: classref-property
@@ -362,6 +387,23 @@ Number of light bounces that are taken into account during baking. Higher values
 - :ref:`CameraAttributes<class_CameraAttributes>` **get_camera_attributes** **(** **)**
 
 The :ref:`CameraAttributes<class_CameraAttributes>` resource that specifies exposure levels to bake at. Auto-exposure and non exposure properties will be ignored. Exposure settings should be used to reduce the dynamic range present when baking. If exposure is too high, the **LightmapGI** will have banding artifacts or may have over-exposure artifacts.
+
+.. rst-class:: classref-item-separator
+
+----
+
+.. _class_LightmapGI_property_denoiser_strength:
+
+.. rst-class:: classref-property
+
+:ref:`float<class_float>` **denoiser_strength** = ``0.1``
+
+.. rst-class:: classref-property-setget
+
+- void **set_denoiser_strength** **(** :ref:`float<class_float>` value **)**
+- :ref:`float<class_float>` **get_denoiser_strength** **(** **)**
+
+The strength of denoising step applied to the generated lightmaps. Only effective if :ref:`use_denoiser<class_LightmapGI_property_use_denoiser>` is ``true`` and :ref:`ProjectSettings.rendering/lightmapping/denoising/denoiser<class_ProjectSettings_property_rendering/lightmapping/denoising/denoiser>` is set to JNLM.
 
 .. rst-class:: classref-item-separator
 
@@ -556,9 +598,26 @@ To further speed up bake times, decrease :ref:`bounces<class_LightmapGI_property
 - void **set_use_denoiser** **(** :ref:`bool<class_bool>` value **)**
 - :ref:`bool<class_bool>` **is_using_denoiser** **(** **)**
 
-If ``true``, uses a CPU-based denoising algorithm on the generated lightmap. This eliminates most noise within the generated lightmap at the cost of longer bake times. File sizes are generally not impacted significantly by the use of a denoiser, although lossless compression may do a better job at compressing a denoised image.
+If ``true``, uses a GPU-based denoising algorithm on the generated lightmap. This eliminates most noise within the generated lightmap at the cost of longer bake times. File sizes are generally not impacted significantly by the use of a denoiser, although lossless compression may do a better job at compressing a denoised image.
 
-\ **Note:** The built-in denoiser (OpenImageDenoise) may crash when denoising lightmaps in large scenes. If you encounter a crash at the end of lightmap baking, try disabling :ref:`use_denoiser<class_LightmapGI_property_use_denoiser>`.
+.. rst-class:: classref-item-separator
+
+----
+
+.. _class_LightmapGI_property_use_texture_for_bounces:
+
+.. rst-class:: classref-property
+
+:ref:`bool<class_bool>` **use_texture_for_bounces** = ``true``
+
+.. rst-class:: classref-property-setget
+
+- void **set_use_texture_for_bounces** **(** :ref:`bool<class_bool>` value **)**
+- :ref:`bool<class_bool>` **is_using_texture_for_bounces** **(** **)**
+
+If ``true``, a texture with the lighting information will be generated to speed up the generation of indirect lighting at the cost of some accuracy. The geometry might exhibit extra light leak artifacts when using low resolution lightmaps or UVs that stretch the lightmap significantly across surfaces. Leave :ref:`use_texture_for_bounces<class_LightmapGI_property_use_texture_for_bounces>` at its default value of ``true`` if unsure.
+
+\ **Note:** :ref:`use_texture_for_bounces<class_LightmapGI_property_use_texture_for_bounces>` only has an effect if :ref:`bounces<class_LightmapGI_property_bounces>` is set to a value greater than or equal to ``1``.
 
 .. |virtual| replace:: :abbr:`virtual (This method should typically be overridden by the user to have any effect.)`
 .. |const| replace:: :abbr:`const (This method has no side effects. It doesn't modify any of the instance's member variables.)`
