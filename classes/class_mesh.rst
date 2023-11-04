@@ -589,6 +589,14 @@ Flag used to mark that the mesh contains up to 8 bone influences per vertex. Thi
 
 Flag used to mark that the mesh intentionally contains no vertex array.
 
+.. _class_Mesh_constant_ARRAY_FLAG_COMPRESS_ATTRIBUTES:
+
+.. rst-class:: classref-enumeration-constant
+
+:ref:`ArrayFormat<enum_Mesh_ArrayFormat>` **ARRAY_FLAG_COMPRESS_ATTRIBUTES** = ``536870912``
+
+Flag used to mark that a mesh is using compressed attributes (vertices, normals, tangents, UVs). When this form of compression is enabled, vertex positions will be packed into an RGBA16UNORM attribute and scaled in the vertex shader. The normal and tangent will be packed into an RG16UNORM representing an axis, and a 16-bit float stored in the A-channel of the vertex. UVs will use 16-bit normalized floats instead of full 32-bit signed floats. When using this compression mode you must use either vertices, normals, and tangents or only vertices. You cannot use normals without tangents. Importers will automatically enable this compression if they can.
+
 .. rst-class:: classref-item-separator
 
 ----
@@ -912,7 +920,7 @@ Returns all the vertices that make up the faces of the mesh. Each three vertices
 
 :ref:`int<class_int>` **get_surface_count** **(** **)** |const|
 
-Returns the number of surfaces that the **Mesh** holds.
+Returns the number of surfaces that the **Mesh** holds. This is equivalent to :ref:`MeshInstance3D.get_surface_override_material_count<class_MeshInstance3D_method_get_surface_override_material_count>`.
 
 .. rst-class:: classref-item-separator
 
@@ -924,7 +932,7 @@ Returns the number of surfaces that the **Mesh** holds.
 
 :ref:`Array<class_Array>` **surface_get_arrays** **(** :ref:`int<class_int>` surf_idx **)** |const|
 
-Returns the arrays for the vertices, normals, uvs, etc. that make up the requested surface (see :ref:`ArrayMesh.add_surface_from_arrays<class_ArrayMesh_method_add_surface_from_arrays>`).
+Returns the arrays for the vertices, normals, UVs, etc. that make up the requested surface (see :ref:`ArrayMesh.add_surface_from_arrays<class_ArrayMesh_method_add_surface_from_arrays>`).
 
 .. rst-class:: classref-item-separator
 
@@ -950,6 +958,8 @@ Returns the blend shape arrays for the requested surface.
 
 Returns a :ref:`Material<class_Material>` in a given surface. Surface is rendered using this material.
 
+\ **Note:** This returns the material within the **Mesh** resource, not the :ref:`Material<class_Material>` associated to the :ref:`MeshInstance3D<class_MeshInstance3D>`'s Surface Material Override properties. To get the :ref:`Material<class_Material>` associated to the :ref:`MeshInstance3D<class_MeshInstance3D>`'s Surface Material Override properties, use :ref:`MeshInstance3D.get_surface_override_material<class_MeshInstance3D_method_get_surface_override_material>` instead.
+
 .. rst-class:: classref-item-separator
 
 ----
@@ -961,6 +971,8 @@ Returns a :ref:`Material<class_Material>` in a given surface. Surface is rendere
 void **surface_set_material** **(** :ref:`int<class_int>` surf_idx, :ref:`Material<class_Material>` material **)**
 
 Sets a :ref:`Material<class_Material>` for a given surface. Surface will be rendered using this material.
+
+\ **Note:** This assigns the material within the **Mesh** resource, not the :ref:`Material<class_Material>` associated to the :ref:`MeshInstance3D<class_MeshInstance3D>`'s Surface Material Override properties. To set the :ref:`Material<class_Material>` associated to the :ref:`MeshInstance3D<class_MeshInstance3D>`'s Surface Material Override properties, use :ref:`MeshInstance3D.set_surface_override_material<class_MeshInstance3D_method_set_surface_override_material>` instead.
 
 .. |virtual| replace:: :abbr:`virtual (This method should typically be overridden by the user to have any effect.)`
 .. |const| replace:: :abbr:`const (This method has no side effects. It doesn't modify any of the instance's member variables.)`
