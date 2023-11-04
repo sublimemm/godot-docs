@@ -12,7 +12,7 @@ Node
 
 **Inherits:** :ref:`Object<class_Object>`
 
-**Inherited By:** :ref:`AnimationPlayer<class_AnimationPlayer>`, :ref:`AnimationTree<class_AnimationTree>`, :ref:`AudioStreamPlayer<class_AudioStreamPlayer>`, :ref:`CanvasItem<class_CanvasItem>`, :ref:`CanvasLayer<class_CanvasLayer>`, :ref:`EditorFileSystem<class_EditorFileSystem>`, :ref:`EditorPlugin<class_EditorPlugin>`, :ref:`EditorResourcePreview<class_EditorResourcePreview>`, :ref:`HTTPRequest<class_HTTPRequest>`, :ref:`InstancePlaceholder<class_InstancePlaceholder>`, :ref:`MissingNode<class_MissingNode>`, :ref:`MultiplayerSpawner<class_MultiplayerSpawner>`, :ref:`MultiplayerSynchronizer<class_MultiplayerSynchronizer>`, :ref:`NavigationAgent2D<class_NavigationAgent2D>`, :ref:`NavigationAgent3D<class_NavigationAgent3D>`, :ref:`Node3D<class_Node3D>`, :ref:`ResourcePreloader<class_ResourcePreloader>`, :ref:`ShaderGlobalsOverride<class_ShaderGlobalsOverride>`, :ref:`SkeletonIK3D<class_SkeletonIK3D>`, :ref:`Timer<class_Timer>`, :ref:`Viewport<class_Viewport>`, :ref:`WorldEnvironment<class_WorldEnvironment>`
+**Inherited By:** :ref:`AnimationMixer<class_AnimationMixer>`, :ref:`AudioStreamPlayer<class_AudioStreamPlayer>`, :ref:`CanvasItem<class_CanvasItem>`, :ref:`CanvasLayer<class_CanvasLayer>`, :ref:`EditorFileSystem<class_EditorFileSystem>`, :ref:`EditorPlugin<class_EditorPlugin>`, :ref:`EditorResourcePreview<class_EditorResourcePreview>`, :ref:`HTTPRequest<class_HTTPRequest>`, :ref:`InstancePlaceholder<class_InstancePlaceholder>`, :ref:`MissingNode<class_MissingNode>`, :ref:`MultiplayerSpawner<class_MultiplayerSpawner>`, :ref:`MultiplayerSynchronizer<class_MultiplayerSynchronizer>`, :ref:`NavigationAgent2D<class_NavigationAgent2D>`, :ref:`NavigationAgent3D<class_NavigationAgent3D>`, :ref:`Node3D<class_Node3D>`, :ref:`ResourcePreloader<class_ResourcePreloader>`, :ref:`ShaderGlobalsOverride<class_ShaderGlobalsOverride>`, :ref:`SkeletonIK3D<class_SkeletonIK3D>`, :ref:`Timer<class_Timer>`, :ref:`Viewport<class_Viewport>`, :ref:`WorldEnvironment<class_WorldEnvironment>`
 
 Base class for all scene objects.
 
@@ -172,6 +172,10 @@ Methods
    | :ref:`bool<class_bool>`                           | :ref:`get_scene_instance_load_placeholder<class_Node_method_get_scene_instance_load_placeholder>` **(** **)** |const|                                                                                                          |
    +---------------------------------------------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
    | :ref:`SceneTree<class_SceneTree>`                 | :ref:`get_tree<class_Node_method_get_tree>` **(** **)** |const|                                                                                                                                                                |
+   +---------------------------------------------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+   | :ref:`String<class_String>`                       | :ref:`get_tree_string<class_Node_method_get_tree_string>` **(** **)**                                                                                                                                                          |
+   +---------------------------------------------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+   | :ref:`String<class_String>`                       | :ref:`get_tree_string_pretty<class_Node_method_get_tree_string_pretty>` **(** **)**                                                                                                                                            |
    +---------------------------------------------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
    | :ref:`Viewport<class_Viewport>`                   | :ref:`get_viewport<class_Node_method_get_viewport>` **(** **)** |const|                                                                                                                                                        |
    +---------------------------------------------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
@@ -765,7 +769,7 @@ Notification received every frame when the internal physics process flag is set 
 
 **NOTIFICATION_POST_ENTER_TREE** = ``27``
 
-Notification received when the node is ready, just before :ref:`NOTIFICATION_READY<class_Node_constant_NOTIFICATION_READY>` is received. Unlike the latter, it's sent every time the node enters tree, instead of only once.
+Notification received when the node is ready, just before :ref:`NOTIFICATION_READY<class_Node_constant_NOTIFICATION_READY>` is received. Unlike the latter, it's sent every time the node enters the tree, instead of only once.
 
 .. _class_Node_constant_NOTIFICATION_DISABLED:
 
@@ -1032,6 +1036,8 @@ Add a custom description to a node. It will be displayed in a tooltip when hover
 - :ref:`MultiplayerAPI<class_MultiplayerAPI>` **get_multiplayer** **(** **)**
 
 The :ref:`MultiplayerAPI<class_MultiplayerAPI>` instance associated with this node. See :ref:`SceneTree.get_multiplayer<class_SceneTree_method_get_multiplayer>`.
+
+\ **Note:** Renaming the node, or moving it in the tree, will not move the :ref:`MultiplayerAPI<class_MultiplayerAPI>` to the new path, you will have to update this manually.
 
 .. rst-class:: classref-item-separator
 
@@ -1349,7 +1355,7 @@ Corresponds to the :ref:`NOTIFICATION_READY<class_Node_constant_NOTIFICATION_REA
 
 Usually used for initialization. For even earlier initialization, :ref:`Object._init<class_Object_method__init>` may be used. See also :ref:`_enter_tree<class_Node_method__enter_tree>`.
 
-\ **Note:** :ref:`_ready<class_Node_method__ready>` may be called only once for each node. After removing a node from the scene tree and adding it again, ``_ready`` will not be called a second time. This can be bypassed by requesting another call with :ref:`request_ready<class_Node_method_request_ready>`, which may be called anywhere before adding the node again.
+\ **Note:** :ref:`_ready<class_Node_method__ready>` may be called only once for each node. After removing a node from the scene tree and adding it again, :ref:`_ready<class_Node_method__ready>` will not be called a second time. This can be bypassed by requesting another call with :ref:`request_ready<class_Node_method_request_ready>`, which may be called anywhere before adding the node again.
 
 .. rst-class:: classref-item-separator
 
@@ -1943,6 +1949,52 @@ Returns the :ref:`SceneTree<class_SceneTree>` that contains this node.
 
 ----
 
+.. _class_Node_method_get_tree_string:
+
+.. rst-class:: classref-method
+
+:ref:`String<class_String>` **get_tree_string** **(** **)**
+
+Returns the tree as a :ref:`String<class_String>`. Used mainly for debugging purposes. This version displays the path relative to the current node, and is good for copy/pasting into the :ref:`get_node<class_Node_method_get_node>` function. It also can be used in game UI/UX.
+
+\ **Example output:**\ 
+
+::
+
+    TheGame
+    TheGame/Menu
+    TheGame/Menu/Label
+    TheGame/Menu/Camera2D
+    TheGame/SplashScreen
+    TheGame/SplashScreen/Camera2D
+
+.. rst-class:: classref-item-separator
+
+----
+
+.. _class_Node_method_get_tree_string_pretty:
+
+.. rst-class:: classref-method
+
+:ref:`String<class_String>` **get_tree_string_pretty** **(** **)**
+
+Similar to :ref:`get_tree_string<class_Node_method_get_tree_string>`, this returns the tree as a :ref:`String<class_String>`. This version displays a more graphical representation similar to what is displayed in the Scene Dock. It is useful for inspecting larger trees.
+
+\ **Example output:**\ 
+
+::
+
+     ┖╴TheGame
+        ┠╴Menu
+        ┃  ┠╴Label
+        ┃  ┖╴Camera2D
+        ┖╴SplashScreen
+           ┖╴Camera2D
+
+.. rst-class:: classref-item-separator
+
+----
+
 .. _class_Node_method_get_viewport:
 
 .. rst-class:: classref-method
@@ -2387,7 +2439,7 @@ If ``keep_groups`` is ``true``, the ``node`` is added to the same groups that th
 
 void **request_ready** **(** **)**
 
-Requests that ``_ready`` be called again. Note that the method won't be called immediately, but is scheduled for when the node is added to the scene tree again (see :ref:`_ready<class_Node_method__ready>`). ``_ready`` is called only for the node which requested it, which means that you need to request ready for each child if you want them to call ``_ready`` too (in which case, ``_ready`` will be called in the same order as it would normally).
+Requests that :ref:`_ready<class_Node_method__ready>` be called again. Note that the method won't be called immediately, but is scheduled for when the node is added to the scene tree again. :ref:`_ready<class_Node_method__ready>` is called only for the node which requested it, which means that you need to request ready for each child if you want them to call :ref:`_ready<class_Node_method__ready>` too (in which case, :ref:`_ready<class_Node_method__ready>` will be called in the same order as it would normally).
 
 .. rst-class:: classref-item-separator
 

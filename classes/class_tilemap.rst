@@ -129,6 +129,8 @@ Methods
    +---------------------------------------------+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
    | :ref:`bool<class_bool>`                     | :ref:`is_layer_enabled<class_TileMap_method_is_layer_enabled>` **(** :ref:`int<class_int>` layer **)** |const|                                                                                                                                                                          |
    +---------------------------------------------+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+   | :ref:`bool<class_bool>`                     | :ref:`is_layer_navigation_enabled<class_TileMap_method_is_layer_navigation_enabled>` **(** :ref:`int<class_int>` layer **)** |const|                                                                                                                                                    |
+   +---------------------------------------------+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
    | :ref:`bool<class_bool>`                     | :ref:`is_layer_y_sort_enabled<class_TileMap_method_is_layer_y_sort_enabled>` **(** :ref:`int<class_int>` layer **)** |const|                                                                                                                                                            |
    +---------------------------------------------+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
    | :ref:`Vector2i<class_Vector2i>`             | :ref:`local_to_map<class_TileMap_method_local_to_map>` **(** :ref:`Vector2<class_Vector2>` local_position **)** |const|                                                                                                                                                                 |
@@ -154,6 +156,8 @@ Methods
    | void                                        | :ref:`set_layer_modulate<class_TileMap_method_set_layer_modulate>` **(** :ref:`int<class_int>` layer, :ref:`Color<class_Color>` modulate **)**                                                                                                                                          |
    +---------------------------------------------+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
    | void                                        | :ref:`set_layer_name<class_TileMap_method_set_layer_name>` **(** :ref:`int<class_int>` layer, :ref:`String<class_String>` name **)**                                                                                                                                                    |
+   +---------------------------------------------+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+   | void                                        | :ref:`set_layer_navigation_enabled<class_TileMap_method_set_layer_navigation_enabled>` **(** :ref:`int<class_int>` layer, :ref:`bool<class_bool>` enabled **)**                                                                                                                         |
    +---------------------------------------------+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
    | void                                        | :ref:`set_layer_navigation_map<class_TileMap_method_set_layer_navigation_map>` **(** :ref:`int<class_int>` layer, :ref:`RID<class_RID>` map **)**                                                                                                                                       |
    +---------------------------------------------+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
@@ -299,7 +303,11 @@ Show or hide the TileMap's navigation meshes. If set to :ref:`VISIBILITY_MODE_DE
 - void **set_rendering_quadrant_size** **(** :ref:`int<class_int>` value **)**
 - :ref:`int<class_int>` **get_rendering_quadrant_size** **(** **)**
 
-The TileMap's quadrant size. Optimizes drawing by batching, using chunks of this size.
+The TileMap's quadrant size. A quadrant is a group of tiles to be drawn together on a single canvas item, for optimization purposes. :ref:`rendering_quadrant_size<class_TileMap_property_rendering_quadrant_size>` defines the length of a square's side, in the map's coordinate system, that forms the quadrant. Thus, the default quandrant size groups together ``16 * 16 = 256`` tiles.
+
+The quadrant size does not apply on Y-sorted layers, as tiles are be grouped by Y position instead in that case.
+
+\ **Note:** As quadrants are created according to the map's coordinate system, the quadrant's "square shape" might not look like square in the TileMap's local coordinate system.
 
 .. rst-class:: classref-item-separator
 
@@ -725,6 +733,18 @@ If ``layer`` is negative, the layers are accessed from the last one.
 
 ----
 
+.. _class_TileMap_method_is_layer_navigation_enabled:
+
+.. rst-class:: classref-method
+
+:ref:`bool<class_bool>` **is_layer_navigation_enabled** **(** :ref:`int<class_int>` layer **)** |const|
+
+Returns if a layer's built-in navigation regions generation is enabled.
+
+.. rst-class:: classref-item-separator
+
+----
+
 .. _class_TileMap_method_is_layer_y_sort_enabled:
 
 .. rst-class:: classref-method
@@ -914,6 +934,18 @@ void **set_layer_name** **(** :ref:`int<class_int>` layer, :ref:`String<class_St
 Sets a layer's name. This is mostly useful in the editor.
 
 If ``layer`` is negative, the layers are accessed from the last one.
+
+.. rst-class:: classref-item-separator
+
+----
+
+.. _class_TileMap_method_set_layer_navigation_enabled:
+
+.. rst-class:: classref-method
+
+void **set_layer_navigation_enabled** **(** :ref:`int<class_int>` layer, :ref:`bool<class_bool>` enabled **)**
+
+Enables or disables a layer's built-in navigation regions generation. Disable this if you need to bake navigation regions from a TileMap using a :ref:`NavigationRegion2D<class_NavigationRegion2D>` node.
 
 .. rst-class:: classref-item-separator
 
