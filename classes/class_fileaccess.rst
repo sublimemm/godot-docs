@@ -644,6 +644,8 @@ Returns the last error that happened when trying to perform operations. Compare 
 
 Returns the whole ``path`` file contents as a :ref:`PackedByteArray<class_PackedByteArray>` without any decoding.
 
+Returns an empty :ref:`PackedByteArray<class_PackedByteArray>` if an error occurred while opening the file. You can use :ref:`get_open_error<class_FileAccess_method_get_open_error>` to check the error that occurred.
+
 .. rst-class:: classref-item-separator
 
 ----
@@ -655,6 +657,8 @@ Returns the whole ``path`` file contents as a :ref:`PackedByteArray<class_Packed
 :ref:`String<class_String>` **get_file_as_string** **(** :ref:`String<class_String>` path **)** |static|
 
 Returns the whole ``path`` file contents as a :ref:`String<class_String>`. Text is interpreted as being UTF-8 encoded.
+
+Returns an empty :ref:`String<class_String>` if an error occurred while opening the file. You can use :ref:`get_open_error<class_FileAccess_method_get_open_error>` to check the error that occurred.
 
 .. rst-class:: classref-item-separator
 
@@ -970,7 +974,7 @@ Changes the file reading/writing cursor to the specified position (in bytes from
 
 :ref:`Error<enum_@GlobalScope_Error>` **set_hidden_attribute** **(** :ref:`String<class_String>` file, :ref:`bool<class_bool>` hidden **)** |static|
 
-Sets file ``hidden`` attribute.
+Sets file **hidden** attribute.
 
 \ **Note:** This method is implemented on iOS, BSD, macOS, and Windows.
 
@@ -984,7 +988,7 @@ Sets file ``hidden`` attribute.
 
 :ref:`Error<enum_@GlobalScope_Error>` **set_read_only_attribute** **(** :ref:`String<class_String>` file, :ref:`bool<class_bool>` ro **)** |static|
 
-Sets file ``read only`` attribute.
+Sets file **read only** attribute.
 
 \ **Note:** This method is implemented on iOS, BSD, macOS, and Windows.
 
@@ -1217,7 +1221,7 @@ Stores any Variant value in the file. If ``full_objects`` is ``true``, encoding 
 
 Internally, this uses the same encoding mechanism as the :ref:`@GlobalScope.var_to_bytes<class_@GlobalScope_method_var_to_bytes>` method.
 
-\ **Note:** Not all properties are included. Only properties that are configured with the :ref:`@GlobalScope.PROPERTY_USAGE_STORAGE<class_@GlobalScope_constant_PROPERTY_USAGE_STORAGE>` flag set will be serialized. You can add a new usage flag to a property by overriding the :ref:`Object._get_property_list<class_Object_method__get_property_list>` method in your class. You can also check how property usage is configured by calling :ref:`Object._get_property_list<class_Object_method__get_property_list>`. See :ref:`PropertyUsageFlags<enum_@GlobalScope_PropertyUsageFlags>` for the possible usage flags.
+\ **Note:** Not all properties are included. Only properties that are configured with the :ref:`@GlobalScope.PROPERTY_USAGE_STORAGE<class_@GlobalScope_constant_PROPERTY_USAGE_STORAGE>` flag set will be serialized. You can add a new usage flag to a property by overriding the :ref:`Object._get_property_list<class_Object_private_method__get_property_list>` method in your class. You can also check how property usage is configured by calling :ref:`Object._get_property_list<class_Object_private_method__get_property_list>`. See :ref:`PropertyUsageFlags<enum_@GlobalScope_PropertyUsageFlags>` for the possible usage flags.
 
 .. |virtual| replace:: :abbr:`virtual (This method should typically be overridden by the user to have any effect.)`
 .. |const| replace:: :abbr:`const (This method has no side effects. It doesn't modify any of the instance's member variables.)`
