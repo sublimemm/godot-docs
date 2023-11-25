@@ -21,7 +21,7 @@ Description
 
 Native image datatype. Contains image data which can be converted to an :ref:`ImageTexture<class_ImageTexture>` and provides commonly used *image processing* methods. The maximum width and height for an **Image** are :ref:`MAX_WIDTH<class_Image_constant_MAX_WIDTH>` and :ref:`MAX_HEIGHT<class_Image_constant_MAX_HEIGHT>`.
 
-An **Image** cannot be assigned to a ``texture`` property of an object directly (such as :ref:`Sprite2D<class_Sprite2D>`), and has to be converted manually to an :ref:`ImageTexture<class_ImageTexture>` first.
+An **Image** cannot be assigned to a texture property of an object directly (such as :ref:`Sprite2D.texture<class_Sprite2D_property_texture>`), and has to be converted manually to an :ref:`ImageTexture<class_ImageTexture>` first.
 
 \ **Note:** The maximum image size is 16384×16384 pixels due to graphics hardware limitations. Larger images may fail to import.
 
@@ -31,6 +31,8 @@ Tutorials
 ---------
 
 - :doc:`Importing images <../tutorials/assets_pipeline/importing_images>`
+
+- :doc:`Runtime file loading and saving <../tutorials/io/runtime_file_loading_and_saving>`
 
 .. rst-class:: classref-reftable-group
 
@@ -106,6 +108,8 @@ Methods
    | :ref:`Format<enum_Image_Format>`              | :ref:`get_format<class_Image_method_get_format>` **(** **)** |const|                                                                                                                                                                                                          |
    +-----------------------------------------------+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
    | :ref:`int<class_int>`                         | :ref:`get_height<class_Image_method_get_height>` **(** **)** |const|                                                                                                                                                                                                          |
+   +-----------------------------------------------+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+   | :ref:`int<class_int>`                         | :ref:`get_mipmap_count<class_Image_method_get_mipmap_count>` **(** **)** |const|                                                                                                                                                                                              |
    +-----------------------------------------------+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
    | :ref:`int<class_int>`                         | :ref:`get_mipmap_offset<class_Image_method_get_mipmap_offset>` **(** :ref:`int<class_int>` mipmap **)** |const|                                                                                                                                                               |
    +-----------------------------------------------+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
@@ -311,7 +315,7 @@ OpenGL texture format ``GL_RGBA32F`` where there are four components, each a 32-
 
 :ref:`Format<enum_Image_Format>` **FORMAT_RH** = ``12``
 
-OpenGL texture format ``GL_R32F`` where there's one component, a 16-bit "half-precision" floating-point value.
+OpenGL texture format ``GL_R16F`` where there's one component, a 16-bit "half-precision" floating-point value.
 
 .. _class_Image_constant_FORMAT_RGH:
 
@@ -319,7 +323,7 @@ OpenGL texture format ``GL_R32F`` where there's one component, a 16-bit "half-pr
 
 :ref:`Format<enum_Image_Format>` **FORMAT_RGH** = ``13``
 
-OpenGL texture format ``GL_RG32F`` where there are two components, each a 16-bit "half-precision" floating-point value.
+OpenGL texture format ``GL_RG16F`` where there are two components, each a 16-bit "half-precision" floating-point value.
 
 .. _class_Image_constant_FORMAT_RGBH:
 
@@ -327,7 +331,7 @@ OpenGL texture format ``GL_RG32F`` where there are two components, each a 16-bit
 
 :ref:`Format<enum_Image_Format>` **FORMAT_RGBH** = ``14``
 
-OpenGL texture format ``GL_RGB32F`` where there are three components, each a 16-bit "half-precision" floating-point value.
+OpenGL texture format ``GL_RGB16F`` where there are three components, each a 16-bit "half-precision" floating-point value.
 
 .. _class_Image_constant_FORMAT_RGBAH:
 
@@ -335,7 +339,7 @@ OpenGL texture format ``GL_RGB32F`` where there are three components, each a 16-
 
 :ref:`Format<enum_Image_Format>` **FORMAT_RGBAH** = ``15``
 
-OpenGL texture format ``GL_RGBA32F`` where there are four components, each a 16-bit "half-precision" floating-point value.
+OpenGL texture format ``GL_RGBA16F`` where there are four components, each a 16-bit "half-precision" floating-point value.
 
 .. _class_Image_constant_FORMAT_RGBE9995:
 
@@ -1160,7 +1164,9 @@ Flips the image vertically.
 
 :ref:`Error<enum_@GlobalScope_Error>` **generate_mipmaps** **(** :ref:`bool<class_bool>` renormalize=false **)**
 
-Generates mipmaps for the image. Mipmaps are precalculated lower-resolution copies of the image that are automatically used if the image needs to be scaled down when rendered. They help improve image quality and performance when rendering. This method returns an error if the image is compressed, in a custom format, or if the image's width/height is ``0``.
+Generates mipmaps for the image. Mipmaps are precalculated lower-resolution copies of the image that are automatically used if the image needs to be scaled down when rendered. They help improve image quality and performance when rendering. This method returns an error if the image is compressed, in a custom format, or if the image's width/height is ``0``. Enabling ``renormalize`` when generating mipmaps for normal map textures will make sure all resulting vector values are normalized.
+
+It is possible to check if the image has mipmaps by calling :ref:`has_mipmaps<class_Image_method_has_mipmaps>` or :ref:`get_mipmap_count<class_Image_method_get_mipmap_count>`. Calling :ref:`generate_mipmaps<class_Image_method_generate_mipmaps>` on an image that already has mipmaps will replace existing mipmaps in the image.
 
 .. rst-class:: classref-item-separator
 
@@ -1202,13 +1208,25 @@ Returns the image's height.
 
 ----
 
+.. _class_Image_method_get_mipmap_count:
+
+.. rst-class:: classref-method
+
+:ref:`int<class_int>` **get_mipmap_count** **(** **)** |const|
+
+Returns the number of mipmap levels or 0 if the image has no mipmaps. The largest main level image is not counted as a mipmap level by this method, so if you want to include it you can add 1 to this count.
+
+.. rst-class:: classref-item-separator
+
+----
+
 .. _class_Image_method_get_mipmap_offset:
 
 .. rst-class:: classref-method
 
 :ref:`int<class_int>` **get_mipmap_offset** **(** :ref:`int<class_int>` mipmap **)** |const|
 
-Returns the offset where the image's mipmap with index ``mipmap`` is stored in the ``data`` dictionary.
+Returns the offset where the image's mipmap with index ``mipmap`` is stored in the :ref:`data<class_Image_property_data>` dictionary.
 
 .. rst-class:: classref-item-separator
 
@@ -1364,6 +1382,8 @@ Loads an image from the binary contents of a BMP file.
 
 \ **Note:** Godot's BMP module doesn't support 16-bit per pixel images. Only 1-bit, 4-bit, 8-bit, 24-bit, and 32-bit per pixel images are supported.
 
+\ **Note:** This method is only available in engine builds with the BMP module enabled. By default, the BMP module is enabled, but it can be disabled at build-time using the ``module_bmp_enabled=no`` SCons option.
+
 .. rst-class:: classref-item-separator
 
 ----
@@ -1398,7 +1418,11 @@ Loads an image from the binary contents of a JPEG file.
 
 :ref:`Error<enum_@GlobalScope_Error>` **load_ktx_from_buffer** **(** :ref:`PackedByteArray<class_PackedByteArray>` buffer **)**
 
-Loads an image from the binary contents of a KTX file.
+Loads an image from the binary contents of a `KTX <https://github.com/KhronosGroup/KTX-Software>`__ file. Unlike most image formats, KTX can store VRAM-compressed data and embed mipmaps.
+
+\ **Note:** Godot's libktx implementation only supports 2D images. Cubemaps, texture arrays, and de-padding are not supported.
+
+\ **Note:** This method is only available in engine builds with the KTX module enabled. By default, the KTX module is enabled, but it can be disabled at build-time using the ``module_ktx_enabled=no`` SCons option.
 
 .. rst-class:: classref-item-separator
 
@@ -1454,6 +1478,8 @@ Loads an image from the string contents of a SVG file (**.svg**).
 
 Loads an image from the binary contents of a TGA file.
 
+\ **Note:** This method is only available in engine builds with the TGA module enabled. By default, the TGA module is enabled, but it can be disabled at build-time using the ``module_tga_enabled=no`` SCons option.
+
 .. rst-class:: classref-item-separator
 
 ----
@@ -1488,7 +1514,7 @@ Converts the image's data to represent coordinates on a 3D plane. This is used w
 
 void **premultiply_alpha** **(** **)**
 
-Multiplies color values with alpha values. Resulting color values for a pixel are ``(color * alpha)/256``.
+Multiplies color values with alpha values. Resulting color values for a pixel are ``(color * alpha)/256``. See also :ref:`CanvasItemMaterial.blend_mode<class_CanvasItemMaterial_property_blend_mode>`.
 
 .. rst-class:: classref-item-separator
 
@@ -1640,7 +1666,9 @@ Saves the image as a PNG file to a byte array.
 
 :ref:`Error<enum_@GlobalScope_Error>` **save_webp** **(** :ref:`String<class_String>` path, :ref:`bool<class_bool>` lossy=false, :ref:`float<class_float>` quality=0.75 **)** |const|
 
-Saves the image as a WebP (Web Picture) file to the file at ``path``. By default it will save lossless. If ``lossy`` is true, the image will be saved lossy, using the ``quality`` setting between 0.0 and 1.0 (inclusive).
+Saves the image as a WebP (Web Picture) file to the file at ``path``. By default it will save lossless. If ``lossy`` is true, the image will be saved lossy, using the ``quality`` setting between 0.0 and 1.0 (inclusive). Lossless WebP offers more efficient compression than PNG.
+
+\ **Note:** The WebP format is limited to a size of 16383×16383 pixels, while PNG can save larger images.
 
 .. rst-class:: classref-item-separator
 
@@ -1652,7 +1680,9 @@ Saves the image as a WebP (Web Picture) file to the file at ``path``. By default
 
 :ref:`PackedByteArray<class_PackedByteArray>` **save_webp_to_buffer** **(** :ref:`bool<class_bool>` lossy=false, :ref:`float<class_float>` quality=0.75 **)** |const|
 
-Saves the image as a WebP (Web Picture) file to a byte array. By default it will save lossless. If ``lossy`` is true, the image will be saved lossy, using the ``quality`` setting between 0.0 and 1.0 (inclusive).
+Saves the image as a WebP (Web Picture) file to a byte array. By default it will save lossless. If ``lossy`` is true, the image will be saved lossy, using the ``quality`` setting between 0.0 and 1.0 (inclusive). Lossless WebP offers more efficient compression than PNG.
+
+\ **Note:** The WebP format is limited to a size of 16383×16383 pixels, while PNG can save larger images.
 
 .. rst-class:: classref-item-separator
 
@@ -1750,7 +1780,7 @@ This is the same as :ref:`set_pixel<class_Image_method_set_pixel>`, but with a :
 
 void **shrink_x2** **(** **)**
 
-Shrinks the image by a factor of 2.
+Shrinks the image by a factor of 2 on each axis (this divides the pixel count by 4).
 
 .. rst-class:: classref-item-separator
 

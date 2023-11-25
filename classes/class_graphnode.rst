@@ -50,7 +50,7 @@ Methods
    :widths: auto
 
    +-------------------------------------------+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-   | void                                      | :ref:`_draw_port<class_GraphNode_method__draw_port>` **(** :ref:`int<class_int>` slot_index, :ref:`Vector2i<class_Vector2i>` position, :ref:`bool<class_bool>` left, :ref:`Color<class_Color>` color **)** |virtual|                                                                                                                                                                                                                                                                              |
+   | void                                      | :ref:`_draw_port<class_GraphNode_private_method__draw_port>` **(** :ref:`int<class_int>` slot_index, :ref:`Vector2i<class_Vector2i>` position, :ref:`bool<class_bool>` left, :ref:`Color<class_Color>` color **)** |virtual|                                                                                                                                                                                                                                                                      |
    +-------------------------------------------+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
    | void                                      | :ref:`clear_all_slots<class_GraphNode_method_clear_all_slots>` **(** **)**                                                                                                                                                                                                                                                                                                                                                                                                                        |
    +-------------------------------------------+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
@@ -126,8 +126,6 @@ Theme Properties
    +-----------------------------------+-------------------------------------------------------------------------+-----------------------------------+
    | :ref:`Texture2D<class_Texture2D>` | :ref:`port<class_GraphNode_theme_icon_port>`                            |                                   |
    +-----------------------------------+-------------------------------------------------------------------------+-----------------------------------+
-   | :ref:`Texture2D<class_Texture2D>` | :ref:`resizer<class_GraphNode_theme_icon_resizer>`                      |                                   |
-   +-----------------------------------+-------------------------------------------------------------------------+-----------------------------------+
    | :ref:`StyleBox<class_StyleBox>`   | :ref:`panel<class_GraphNode_theme_style_panel>`                         |                                   |
    +-----------------------------------+-------------------------------------------------------------------------+-----------------------------------+
    | :ref:`StyleBox<class_StyleBox>`   | :ref:`panel_selected<class_GraphNode_theme_style_panel_selected>`       |                                   |
@@ -187,7 +185,7 @@ The text displayed in the GraphNode's title bar.
 Method Descriptions
 -------------------
 
-.. _class_GraphNode_method__draw_port:
+.. _class_GraphNode_private_method__draw_port:
 
 .. rst-class:: classref-method
 
@@ -597,18 +595,6 @@ The vertical distance between ports.
 :ref:`Texture2D<class_Texture2D>` **port**
 
 The icon used for representing ports.
-
-.. rst-class:: classref-item-separator
-
-----
-
-.. _class_GraphNode_theme_icon_resizer:
-
-.. rst-class:: classref-themeproperty
-
-:ref:`Texture2D<class_Texture2D>` **resizer**
-
-The icon used for the resizer, visible when :ref:`GraphElement.resizable<class_GraphElement_property_resizable>` is enabled.
 
 .. rst-class:: classref-item-separator
 
