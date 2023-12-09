@@ -138,6 +138,8 @@ Methods
    +-------------------------------------------------------------------------+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
    | :ref:`bool<class_bool>`                                                 | :ref:`global_menu_is_item_disabled<class_DisplayServer_method_global_menu_is_item_disabled>` **(** :ref:`String<class_String>` menu_root, :ref:`int<class_int>` idx **)** |const|                                                                                                                                                                                                                                                                                                                     |
    +-------------------------------------------------------------------------+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+   | :ref:`bool<class_bool>`                                                 | :ref:`global_menu_is_item_hidden<class_DisplayServer_method_global_menu_is_item_hidden>` **(** :ref:`String<class_String>` menu_root, :ref:`int<class_int>` idx **)** |const|                                                                                                                                                                                                                                                                                                                         |
+   +-------------------------------------------------------------------------+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
    | :ref:`bool<class_bool>`                                                 | :ref:`global_menu_is_item_radio_checkable<class_DisplayServer_method_global_menu_is_item_radio_checkable>` **(** :ref:`String<class_String>` menu_root, :ref:`int<class_int>` idx **)** |const|                                                                                                                                                                                                                                                                                                       |
    +-------------------------------------------------------------------------+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
    | void                                                                    | :ref:`global_menu_remove_item<class_DisplayServer_method_global_menu_remove_item>` **(** :ref:`String<class_String>` menu_root, :ref:`int<class_int>` idx **)**                                                                                                                                                                                                                                                                                                                                       |
@@ -151,6 +153,10 @@ Methods
    | void                                                                    | :ref:`global_menu_set_item_checked<class_DisplayServer_method_global_menu_set_item_checked>` **(** :ref:`String<class_String>` menu_root, :ref:`int<class_int>` idx, :ref:`bool<class_bool>` checked **)**                                                                                                                                                                                                                                                                                            |
    +-------------------------------------------------------------------------+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
    | void                                                                    | :ref:`global_menu_set_item_disabled<class_DisplayServer_method_global_menu_set_item_disabled>` **(** :ref:`String<class_String>` menu_root, :ref:`int<class_int>` idx, :ref:`bool<class_bool>` disabled **)**                                                                                                                                                                                                                                                                                         |
+   +-------------------------------------------------------------------------+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+   | void                                                                    | :ref:`global_menu_set_item_hidden<class_DisplayServer_method_global_menu_set_item_hidden>` **(** :ref:`String<class_String>` menu_root, :ref:`int<class_int>` idx, :ref:`bool<class_bool>` hidden **)**                                                                                                                                                                                                                                                                                               |
+   +-------------------------------------------------------------------------+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+   | void                                                                    | :ref:`global_menu_set_item_hover_callbacks<class_DisplayServer_method_global_menu_set_item_hover_callbacks>` **(** :ref:`String<class_String>` menu_root, :ref:`int<class_int>` idx, :ref:`Callable<class_Callable>` callback **)**                                                                                                                                                                                                                                                                   |
    +-------------------------------------------------------------------------+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
    | void                                                                    | :ref:`global_menu_set_item_icon<class_DisplayServer_method_global_menu_set_item_icon>` **(** :ref:`String<class_String>` menu_root, :ref:`int<class_int>` idx, :ref:`Texture2D<class_Texture2D>` icon **)**                                                                                                                                                                                                                                                                                           |
    +-------------------------------------------------------------------------+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
@@ -171,6 +177,8 @@ Methods
    | void                                                                    | :ref:`global_menu_set_item_text<class_DisplayServer_method_global_menu_set_item_text>` **(** :ref:`String<class_String>` menu_root, :ref:`int<class_int>` idx, :ref:`String<class_String>` text **)**                                                                                                                                                                                                                                                                                                 |
    +-------------------------------------------------------------------------+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
    | void                                                                    | :ref:`global_menu_set_item_tooltip<class_DisplayServer_method_global_menu_set_item_tooltip>` **(** :ref:`String<class_String>` menu_root, :ref:`int<class_int>` idx, :ref:`String<class_String>` tooltip **)**                                                                                                                                                                                                                                                                                        |
+   +-------------------------------------------------------------------------+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+   | void                                                                    | :ref:`global_menu_set_popup_callbacks<class_DisplayServer_method_global_menu_set_popup_callbacks>` **(** :ref:`String<class_String>` menu_root, :ref:`Callable<class_Callable>` open_callback, :ref:`Callable<class_Callable>` close_callback **)**                                                                                                                                                                                                                                                   |
    +-------------------------------------------------------------------------+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
    | :ref:`bool<class_bool>`                                                 | :ref:`has_feature<class_DisplayServer_method_has_feature>` **(** :ref:`Feature<enum_DisplayServer_Feature>` feature **)** |const|                                                                                                                                                                                                                                                                                                                                                                     |
    +-------------------------------------------------------------------------+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
@@ -301,6 +309,8 @@ Methods
    | :ref:`Vector2i<class_Vector2i>`                                         | :ref:`window_get_size<class_DisplayServer_method_window_get_size>` **(** :ref:`int<class_int>` window_id=0 **)** |const|                                                                                                                                                                                                                                                                                                                                                                              |
    +-------------------------------------------------------------------------+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
    | :ref:`Vector2i<class_Vector2i>`                                         | :ref:`window_get_size_with_decorations<class_DisplayServer_method_window_get_size_with_decorations>` **(** :ref:`int<class_int>` window_id=0 **)** |const|                                                                                                                                                                                                                                                                                                                                            |
+   +-------------------------------------------------------------------------+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+   | :ref:`Vector2i<class_Vector2i>`                                         | :ref:`window_get_title_size<class_DisplayServer_method_window_get_title_size>` **(** :ref:`String<class_String>` title, :ref:`int<class_int>` window_id=0 **)** |const|                                                                                                                                                                                                                                                                                                                               |
    +-------------------------------------------------------------------------+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
    | :ref:`VSyncMode<enum_DisplayServer_VSyncMode>`                          | :ref:`window_get_vsync_mode<class_DisplayServer_method_window_get_vsync_mode>` **(** :ref:`int<class_int>` window_id=0 **)** |const|                                                                                                                                                                                                                                                                                                                                                                  |
    +-------------------------------------------------------------------------+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
@@ -982,7 +992,11 @@ Maximized window mode, i.e. :ref:`Window<class_Window>` will occupy whole screen
 
 Full screen mode with full multi-window support.
 
-Full screen window cover the entire display area of a screen, have no border or decorations. Display video mode is not changed.
+Full screen window covers the entire display area of a screen and has no decorations. The display's video mode is not changed.
+
+\ **On Windows:** Multi-window full-screen mode has a 1px border of the :ref:`ProjectSettings.rendering/environment/defaults/default_clear_color<class_ProjectSettings_property_rendering/environment/defaults/default_clear_color>` color.
+
+\ **On macOS:** A new desktop is used to display the running project.
 
 \ **Note:** Regardless of the platform, enabling full screen will change the window size to match the monitor's size. Therefore, make sure your project supports :doc:`multiple resolutions <../tutorials/rendering/multiple_resolutions>` when enabling full screen mode.
 
@@ -994,11 +1008,11 @@ Full screen window cover the entire display area of a screen, have no border or 
 
 A single window full screen mode. This mode has less overhead, but only one window can be open on a given screen at a time (opening a child window or application switching will trigger a full screen transition).
 
-Full screen window cover the entire display area of a screen, have no border or decorations. Display video mode is not changed.
+Full screen window covers the entire display area of a screen and has no border or decorations. The display's video mode is not changed.
 
 \ **On Windows:** Depending on video driver, full screen transition might cause screens to go black for a moment.
 
-\ **On macOS:** Exclusive full screen mode prevents Dock and Menu from showing up when the mouse pointer is hovering the edge of the screen.
+\ **On macOS:** A new desktop is used to display the running project. Exclusive full screen mode prevents Dock and Menu from showing up when the mouse pointer is hovering the edge of the screen.
 
 \ **On Linux (X11):** Exclusive full screen mode bypasses compositor.
 
@@ -1112,7 +1126,7 @@ enum **WindowEvent**:
 
 :ref:`WindowEvent<enum_DisplayServer_WindowEvent>` **WINDOW_EVENT_MOUSE_ENTER** = ``0``
 
-Sent when the mouse pointer enters the window, see :ref:`window_set_window_event_callback<class_DisplayServer_method_window_set_window_event_callback>`.
+Sent when the mouse pointer enters the window.
 
 .. _class_DisplayServer_constant_WINDOW_EVENT_MOUSE_EXIT:
 
@@ -1120,7 +1134,7 @@ Sent when the mouse pointer enters the window, see :ref:`window_set_window_event
 
 :ref:`WindowEvent<enum_DisplayServer_WindowEvent>` **WINDOW_EVENT_MOUSE_EXIT** = ``1``
 
-Sent when the mouse pointer exits the window, see :ref:`window_set_window_event_callback<class_DisplayServer_method_window_set_window_event_callback>`.
+Sent when the mouse pointer exits the window.
 
 .. _class_DisplayServer_constant_WINDOW_EVENT_FOCUS_IN:
 
@@ -1128,7 +1142,7 @@ Sent when the mouse pointer exits the window, see :ref:`window_set_window_event_
 
 :ref:`WindowEvent<enum_DisplayServer_WindowEvent>` **WINDOW_EVENT_FOCUS_IN** = ``2``
 
-Sent when the window grabs focus, see :ref:`window_set_window_event_callback<class_DisplayServer_method_window_set_window_event_callback>`.
+Sent when the window grabs focus.
 
 .. _class_DisplayServer_constant_WINDOW_EVENT_FOCUS_OUT:
 
@@ -1136,7 +1150,7 @@ Sent when the window grabs focus, see :ref:`window_set_window_event_callback<cla
 
 :ref:`WindowEvent<enum_DisplayServer_WindowEvent>` **WINDOW_EVENT_FOCUS_OUT** = ``3``
 
-Sent when the window loses focus, see :ref:`window_set_window_event_callback<class_DisplayServer_method_window_set_window_event_callback>`.
+Sent when the window loses focus.
 
 .. _class_DisplayServer_constant_WINDOW_EVENT_CLOSE_REQUEST:
 
@@ -1144,7 +1158,7 @@ Sent when the window loses focus, see :ref:`window_set_window_event_callback<cla
 
 :ref:`WindowEvent<enum_DisplayServer_WindowEvent>` **WINDOW_EVENT_CLOSE_REQUEST** = ``4``
 
-Sent when the user has attempted to close the window (e.g. close button is pressed), see :ref:`window_set_window_event_callback<class_DisplayServer_method_window_set_window_event_callback>`.
+Sent when the user has attempted to close the window (e.g. close button is pressed).
 
 .. _class_DisplayServer_constant_WINDOW_EVENT_GO_BACK_REQUEST:
 
@@ -1152,7 +1166,7 @@ Sent when the user has attempted to close the window (e.g. close button is press
 
 :ref:`WindowEvent<enum_DisplayServer_WindowEvent>` **WINDOW_EVENT_GO_BACK_REQUEST** = ``5``
 
-Sent when the device "Back" button is pressed, see :ref:`window_set_window_event_callback<class_DisplayServer_method_window_set_window_event_callback>`.
+Sent when the device "Back" button is pressed.
 
 \ **Note:** This event is implemented only on Android.
 
@@ -1162,7 +1176,7 @@ Sent when the device "Back" button is pressed, see :ref:`window_set_window_event
 
 :ref:`WindowEvent<enum_DisplayServer_WindowEvent>` **WINDOW_EVENT_DPI_CHANGE** = ``6``
 
-Sent when the window is moved to the display with different DPI, or display DPI is changed, see :ref:`window_set_window_event_callback<class_DisplayServer_method_window_set_window_event_callback>`.
+Sent when the window is moved to the display with different DPI, or display DPI is changed.
 
 \ **Note:** This flag is implemented only on macOS.
 
@@ -1172,7 +1186,7 @@ Sent when the window is moved to the display with different DPI, or display DPI 
 
 :ref:`WindowEvent<enum_DisplayServer_WindowEvent>` **WINDOW_EVENT_TITLEBAR_CHANGE** = ``7``
 
-Sent when the window title bar decoration is changed (e.g. :ref:`WINDOW_FLAG_EXTEND_TO_TITLE<class_DisplayServer_constant_WINDOW_FLAG_EXTEND_TO_TITLE>` is set or window entered/exited full screen mode), see :ref:`window_set_window_event_callback<class_DisplayServer_method_window_set_window_event_callback>`.
+Sent when the window title bar decoration is changed (e.g. :ref:`WINDOW_FLAG_EXTEND_TO_TITLE<class_DisplayServer_constant_WINDOW_FLAG_EXTEND_TO_TITLE>` is set or window entered/exited full screen mode).
 
 \ **Note:** This flag is implemented only on macOS.
 
@@ -1282,11 +1296,11 @@ Window view:
 
 OpenGL context (only with the GL Compatibility renderer):
 
-- Windows: ``HGLRC`` for the window.
+- Windows: ``HGLRC`` for the window (native GL), or ``EGLContext`` for the window (ANGLE).
 
 - Linux: ``GLXContext*`` for the window.
 
-- macOS: ``NSOpenGLContext*`` for the window.
+- macOS: ``NSOpenGLContext*`` for the window (native GL), or ``EGLContext`` for the window (ANGLE).
 
 - Android: ``EGLContext`` for the window.
 
@@ -1572,9 +1586,9 @@ Allows the ``process_id`` PID to steal focus from this window. In other words, t
 
 Displays OS native dialog for selecting files or directories in the file system.
 
-Callbacks have the following arguments: ``bool status, PackedStringArray selected_paths``.
+Callbacks have the following arguments: ``bool status, PackedStringArray selected_paths, int selected_filter_index``.
 
-\ **Note:** This method is implemented if the display server has the ``FEATURE_NATIVE_DIALOG`` feature.
+\ **Note:** This method is implemented if the display server has the :ref:`FEATURE_NATIVE_DIALOG<class_DisplayServer_constant_FEATURE_NATIVE_DIALOG>` feature.
 
 \ **Note:** This method is implemented on Linux, Windows and macOS.
 
@@ -2259,6 +2273,22 @@ See :ref:`global_menu_set_item_disabled<class_DisplayServer_method_global_menu_s
 
 ----
 
+.. _class_DisplayServer_method_global_menu_is_item_hidden:
+
+.. rst-class:: classref-method
+
+:ref:`bool<class_bool>` **global_menu_is_item_hidden** **(** :ref:`String<class_String>` menu_root, :ref:`int<class_int>` idx **)** |const|
+
+Returns ``true`` if the item at index ``idx`` is hidden.
+
+See :ref:`global_menu_set_item_hidden<class_DisplayServer_method_global_menu_set_item_hidden>` for more info on how to hide an item.
+
+\ **Note:** This method is implemented only on macOS.
+
+.. rst-class:: classref-item-separator
+
+----
+
 .. _class_DisplayServer_method_global_menu_is_item_radio_checkable:
 
 .. rst-class:: classref-method
@@ -2356,6 +2386,36 @@ Sets the checkstate status of the item at index ``idx``.
 void **global_menu_set_item_disabled** **(** :ref:`String<class_String>` menu_root, :ref:`int<class_int>` idx, :ref:`bool<class_bool>` disabled **)**
 
 Enables/disables the item at index ``idx``. When it is disabled, it can't be selected and its action can't be invoked.
+
+\ **Note:** This method is implemented only on macOS.
+
+.. rst-class:: classref-item-separator
+
+----
+
+.. _class_DisplayServer_method_global_menu_set_item_hidden:
+
+.. rst-class:: classref-method
+
+void **global_menu_set_item_hidden** **(** :ref:`String<class_String>` menu_root, :ref:`int<class_int>` idx, :ref:`bool<class_bool>` hidden **)**
+
+Hides/shows the item at index ``idx``. When it is hidden, an item does not appear in a menu and its action cannot be invoked.
+
+\ **Note:** This method is implemented only on macOS.
+
+.. rst-class:: classref-item-separator
+
+----
+
+.. _class_DisplayServer_method_global_menu_set_item_hover_callbacks:
+
+.. rst-class:: classref-method
+
+void **global_menu_set_item_hover_callbacks** **(** :ref:`String<class_String>` menu_root, :ref:`int<class_int>` idx, :ref:`Callable<class_Callable>` callback **)**
+
+Sets the callback of the item at index ``idx``. The callback is emitted when an item is hovered.
+
+\ **Note:** The ``callback`` Callable needs to accept exactly one Variant parameter, the parameter passed to the Callable will be the value passed to the ``tag`` parameter when the menu item was created.
 
 \ **Note:** This method is implemented only on macOS.
 
@@ -2509,6 +2569,18 @@ Sets the :ref:`String<class_String>` tooltip of the item at the specified index 
 
 ----
 
+.. _class_DisplayServer_method_global_menu_set_popup_callbacks:
+
+.. rst-class:: classref-method
+
+void **global_menu_set_popup_callbacks** **(** :ref:`String<class_String>` menu_root, :ref:`Callable<class_Callable>` open_callback, :ref:`Callable<class_Callable>` close_callback **)**
+
+Registers callables to emit when the menu is respectively about to show or closed.
+
+.. rst-class:: classref-item-separator
+
+----
+
 .. _class_DisplayServer_method_has_feature:
 
 .. rst-class:: classref-method
@@ -2557,7 +2629,7 @@ Returns the composition string contained within the `Input Method Editor <https:
 
 Returns ``true`` if OS is using dark mode.
 
-\ **Note:** This method is implemented on macOS, Windows and Linux (X11).
+\ **Note:** This method is implemented on Android, iOS, macOS, Windows, and Linux (X11).
 
 .. rst-class:: classref-item-separator
 
@@ -2571,7 +2643,7 @@ Returns ``true`` if OS is using dark mode.
 
 Returns ``true`` if OS supports dark mode.
 
-\ **Note:** This method is implemented on macOS, Windows and Linux (X11).
+\ **Note:** This method is implemented on Android, iOS, macOS, Windows, and Linux (X11).
 
 .. rst-class:: classref-item-separator
 
@@ -3053,7 +3125,7 @@ Each :ref:`Dictionary<class_Dictionary>` contains two :ref:`String<class_String>
 
 - ``id`` is voice identifier.
 
-- ``language`` is language code in ``lang_Variant`` format. ``lang`` part is a 2 or 3-letter code based on the ISO-639 standard, in lowercase. And ``Variant`` part is an engine dependent string describing country, region or/and dialect.
+- ``language`` is language code in ``lang_Variant`` format. The ``lang`` part is a 2 or 3-letter code based on the ISO-639 standard, in lowercase. The ``Variant`` part is an engine-dependent string describing country, region or/and dialect.
 
 Note that Godot depends on system libraries for text-to-speech functionality. These libraries are installed by default on Windows and macOS, but not on all Linux distributions. If they are not present, this method will return an empty list. This applies to both Godot users on Linux, as well as end-users on Linux running Godot games that use text-to-speech.
 
@@ -3459,6 +3531,20 @@ Returns the size of the window specified by ``window_id`` (in pixels), including
 
 ----
 
+.. _class_DisplayServer_method_window_get_title_size:
+
+.. rst-class:: classref-method
+
+:ref:`Vector2i<class_Vector2i>` **window_get_title_size** **(** :ref:`String<class_String>` title, :ref:`int<class_int>` window_id=0 **)** |const|
+
+Returns the estimated window title bar size (including text and window buttons) for the window specified by ``window_id`` (in pixels). This method does not change the window title.
+
+\ **Note:** This method is implemented on macOS and Windows.
+
+.. rst-class:: classref-item-separator
+
+----
+
 .. _class_DisplayServer_method_window_get_vsync_mode:
 
 .. rst-class:: classref-method
@@ -3567,6 +3653,8 @@ void **window_set_drop_files_callback** **(** :ref:`Callable<class_Callable>` ca
 
 Sets the ``callback`` that should be called when files are dropped from the operating system's file manager to the window specified by ``window_id``.
 
+\ **Warning:** Advanced users only! Adding such a callback to a :ref:`Window<class_Window>` node will override its default implementation, which can introduce bugs.
+
 \ **Note:** This method is implemented on Windows, macOS, Linux (X11) and Web.
 
 .. rst-class:: classref-item-separator
@@ -3633,6 +3721,8 @@ void **window_set_input_event_callback** **(** :ref:`Callable<class_Callable>` c
 
 Sets the ``callback`` that should be called when any :ref:`InputEvent<class_InputEvent>` is sent to the window specified by ``window_id``.
 
+\ **Warning:** Advanced users only! Adding such a callback to a :ref:`Window<class_Window>` node will override its default implementation, which can introduce bugs.
+
 .. rst-class:: classref-item-separator
 
 ----
@@ -3644,6 +3734,8 @@ Sets the ``callback`` that should be called when any :ref:`InputEvent<class_Inpu
 void **window_set_input_text_callback** **(** :ref:`Callable<class_Callable>` callback, :ref:`int<class_int>` window_id=0 **)**
 
 Sets the ``callback`` that should be called when text is entered using the virtual keyboard to the window specified by ``window_id``.
+
+\ **Warning:** Advanced users only! Adding such a callback to a :ref:`Window<class_Window>` node will override its default implementation, which can introduce bugs.
 
 .. rst-class:: classref-item-separator
 
@@ -3787,6 +3879,8 @@ void **window_set_rect_changed_callback** **(** :ref:`Callable<class_Callable>` 
 
 Sets the ``callback`` that will be called when the window specified by ``window_id`` is moved or resized.
 
+\ **Warning:** Advanced users only! Adding such a callback to a :ref:`Window<class_Window>` node will override its default implementation, which can introduce bugs.
+
 .. rst-class:: classref-item-separator
 
 ----
@@ -3876,6 +3970,8 @@ When :ref:`WINDOW_FLAG_EXTEND_TO_TITLE<class_DisplayServer_constant_WINDOW_FLAG_
 void **window_set_window_event_callback** **(** :ref:`Callable<class_Callable>` callback, :ref:`int<class_int>` window_id=0 **)**
 
 Sets the ``callback`` that will be called when an event occurs in the window specified by ``window_id``.
+
+\ **Warning:** Advanced users only! Adding such a callback to a :ref:`Window<class_Window>` node will override its default implementation, which can introduce bugs.
 
 .. |virtual| replace:: :abbr:`virtual (This method should typically be overridden by the user to have any effect.)`
 .. |const| replace:: :abbr:`const (This method has no side effects. It doesn't modify any of the instance's member variables.)`

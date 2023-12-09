@@ -23,9 +23,9 @@ Description
 
 Abstract base class for everything in 2D space. Canvas items are laid out in a tree; children inherit and extend their parent's transform. **CanvasItem** is extended by :ref:`Control<class_Control>` for GUI-related nodes, and by :ref:`Node2D<class_Node2D>` for 2D game objects.
 
-Any **CanvasItem** can draw. For this, :ref:`queue_redraw<class_CanvasItem_method_queue_redraw>` is called by the engine, then :ref:`NOTIFICATION_DRAW<class_CanvasItem_constant_NOTIFICATION_DRAW>` will be received on idle time to request a redraw. Because of this, canvas items don't need to be redrawn on every frame, improving the performance significantly. Several functions for drawing on the **CanvasItem** are provided (see ``draw_*`` functions). However, they can only be used inside :ref:`_draw<class_CanvasItem_method__draw>`, its corresponding :ref:`Object._notification<class_Object_method__notification>` or methods connected to the :ref:`draw<class_CanvasItem_signal_draw>` signal.
+Any **CanvasItem** can draw. For this, :ref:`queue_redraw<class_CanvasItem_method_queue_redraw>` is called by the engine, then :ref:`NOTIFICATION_DRAW<class_CanvasItem_constant_NOTIFICATION_DRAW>` will be received on idle time to request a redraw. Because of this, canvas items don't need to be redrawn on every frame, improving the performance significantly. Several functions for drawing on the **CanvasItem** are provided (see ``draw_*`` functions). However, they can only be used inside :ref:`_draw<class_CanvasItem_private_method__draw>`, its corresponding :ref:`Object._notification<class_Object_private_method__notification>` or methods connected to the :ref:`draw<class_CanvasItem_signal_draw>` signal.
 
-Canvas items are drawn in tree order. By default, children are on top of their parents, so a root **CanvasItem** will be drawn behind everything. This behavior can be changed on a per-item basis.
+Canvas items are drawn in tree order on their canvas layer. By default, children are on top of their parents, so a root **CanvasItem** will be drawn behind everything. This behavior can be changed on a per-item basis.
 
 A **CanvasItem** can be hidden, which will also hide its children. By adjusting various other properties of a **CanvasItem**, you can also modulate its color (via :ref:`modulate<class_CanvasItem_property_modulate>` or :ref:`self_modulate<class_CanvasItem_property_self_modulate>`), change its Z-index, blend mode, and more.
 
@@ -89,7 +89,7 @@ Methods
    :widths: auto
 
    +---------------------------------------+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-   | void                                  | :ref:`_draw<class_CanvasItem_method__draw>` **(** **)** |virtual|                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        |
+   | void                                  | :ref:`_draw<class_CanvasItem_private_method__draw>` **(** **)** |virtual|                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                |
    +---------------------------------------+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
    | void                                  | :ref:`draw_animation_slice<class_CanvasItem_method_draw_animation_slice>` **(** :ref:`float<class_float>` animation_length, :ref:`float<class_float>` slice_begin, :ref:`float<class_float>` slice_end, :ref:`float<class_float>` offset=0.0 **)**                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                       |
    +---------------------------------------+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
@@ -219,7 +219,7 @@ Signals
 
 **draw** **(** **)**
 
-Emitted when the **CanvasItem** must redraw, *after* the related :ref:`NOTIFICATION_DRAW<class_CanvasItem_constant_NOTIFICATION_DRAW>` notification, and *before* :ref:`_draw<class_CanvasItem_method__draw>` is called.
+Emitted when the **CanvasItem** must redraw, *after* the related :ref:`NOTIFICATION_DRAW<class_CanvasItem_constant_NOTIFICATION_DRAW>` notification, and *before* :ref:`_draw<class_CanvasItem_private_method__draw>` is called.
 
 \ **Note:** Deferred connections do not allow drawing through the ``draw_*`` methods.
 
@@ -288,7 +288,7 @@ The **CanvasItem** will inherit the filter from its parent.
 
 :ref:`TextureFilter<enum_CanvasItem_TextureFilter>` **TEXTURE_FILTER_NEAREST** = ``1``
 
-The texture filter reads from the nearest pixel only. The simplest and fastest method of filtering. Useful for pixel art.
+The texture filter reads from the nearest pixel only. This makes the texture look pixelated from up close, and grainy from a distance (due to mipmaps not being sampled).
 
 .. _class_CanvasItem_constant_TEXTURE_FILTER_LINEAR:
 
@@ -296,7 +296,7 @@ The texture filter reads from the nearest pixel only. The simplest and fastest m
 
 :ref:`TextureFilter<enum_CanvasItem_TextureFilter>` **TEXTURE_FILTER_LINEAR** = ``2``
 
-The texture filter blends between the nearest four pixels. Use this for most cases where you want to avoid a pixelated style.
+The texture filter blends between the nearest 4 pixels. This makes the texture look smooth from up close, and grainy from a distance (due to mipmaps not being sampled).
 
 .. _class_CanvasItem_constant_TEXTURE_FILTER_NEAREST_WITH_MIPMAPS:
 
@@ -304,7 +304,9 @@ The texture filter blends between the nearest four pixels. Use this for most cas
 
 :ref:`TextureFilter<enum_CanvasItem_TextureFilter>` **TEXTURE_FILTER_NEAREST_WITH_MIPMAPS** = ``3``
 
-The texture filter reads from the nearest pixel in the nearest mipmap. This is the fastest way to read from textures with mipmaps.
+The texture filter reads from the nearest pixel and blends between the nearest 2 mipmaps (or uses the nearest mipmap if :ref:`ProjectSettings.rendering/textures/default_filters/use_nearest_mipmap_filter<class_ProjectSettings_property_rendering/textures/default_filters/use_nearest_mipmap_filter>` is ``true``). This makes the texture look pixelated from up close, and smooth from a distance.
+
+Use this for non-pixel art textures that may be viewed at a low scale (e.g. due to :ref:`Camera2D<class_Camera2D>` zoom or sprite scaling), as mipmaps are important to smooth out pixels that are smaller than on-screen pixels.
 
 .. _class_CanvasItem_constant_TEXTURE_FILTER_LINEAR_WITH_MIPMAPS:
 
@@ -312,7 +314,9 @@ The texture filter reads from the nearest pixel in the nearest mipmap. This is t
 
 :ref:`TextureFilter<enum_CanvasItem_TextureFilter>` **TEXTURE_FILTER_LINEAR_WITH_MIPMAPS** = ``4``
 
-The texture filter blends between the nearest 4 pixels and between the nearest 2 mipmaps. Use this for non-pixel art textures that may be viewed at a low scale (e.g. due to :ref:`Camera2D<class_Camera2D>` zoom), as mipmaps are important to smooth out pixels that are smaller than on-screen pixels.
+The texture filter blends between the nearest 4 pixels and between the nearest 2 mipmaps (or uses the nearest mipmap if :ref:`ProjectSettings.rendering/textures/default_filters/use_nearest_mipmap_filter<class_ProjectSettings_property_rendering/textures/default_filters/use_nearest_mipmap_filter>` is ``true``). This makes the texture look smooth from up close, and smooth from a distance.
+
+Use this for non-pixel art textures that may be viewed at a low scale (e.g. due to :ref:`Camera2D<class_Camera2D>` zoom or sprite scaling), as mipmaps are important to smooth out pixels that are smaller than on-screen pixels.
 
 .. _class_CanvasItem_constant_TEXTURE_FILTER_NEAREST_WITH_MIPMAPS_ANISOTROPIC:
 
@@ -320,9 +324,9 @@ The texture filter blends between the nearest 4 pixels and between the nearest 2
 
 :ref:`TextureFilter<enum_CanvasItem_TextureFilter>` **TEXTURE_FILTER_NEAREST_WITH_MIPMAPS_ANISOTROPIC** = ``5``
 
-The texture filter reads from the nearest pixel, but selects a mipmap based on the angle between the surface and the camera view. This reduces artifacts on surfaces that are almost in line with the camera. The anisotropic filtering level can be changed by adjusting :ref:`ProjectSettings.rendering/textures/default_filters/anisotropic_filtering_level<class_ProjectSettings_property_rendering/textures/default_filters/anisotropic_filtering_level>`.
+The texture filter reads from the nearest pixel and blends between 2 mipmaps (or uses the nearest mipmap if :ref:`ProjectSettings.rendering/textures/default_filters/use_nearest_mipmap_filter<class_ProjectSettings_property_rendering/textures/default_filters/use_nearest_mipmap_filter>` is ``true``) based on the angle between the surface and the camera view. This makes the texture look pixelated from up close, and smooth from a distance. Anisotropic filtering improves texture quality on surfaces that are almost in line with the camera, but is slightly slower. The anisotropic filtering level can be changed by adjusting :ref:`ProjectSettings.rendering/textures/default_filters/anisotropic_filtering_level<class_ProjectSettings_property_rendering/textures/default_filters/anisotropic_filtering_level>`.
 
-\ **Note:** This texture filter is rarely useful in 2D projects. :ref:`TEXTURE_FILTER_NEAREST_WITH_MIPMAPS<class_CanvasItem_constant_TEXTURE_FILTER_NEAREST_WITH_MIPMAPS>` is usually more appropriate.
+\ **Note:** This texture filter is rarely useful in 2D projects. :ref:`TEXTURE_FILTER_NEAREST_WITH_MIPMAPS<class_CanvasItem_constant_TEXTURE_FILTER_NEAREST_WITH_MIPMAPS>` is usually more appropriate in this case.
 
 .. _class_CanvasItem_constant_TEXTURE_FILTER_LINEAR_WITH_MIPMAPS_ANISOTROPIC:
 
@@ -330,9 +334,9 @@ The texture filter reads from the nearest pixel, but selects a mipmap based on t
 
 :ref:`TextureFilter<enum_CanvasItem_TextureFilter>` **TEXTURE_FILTER_LINEAR_WITH_MIPMAPS_ANISOTROPIC** = ``6``
 
-The texture filter blends between the nearest 4 pixels and selects a mipmap based on the angle between the surface and the camera view. This reduces artifacts on surfaces that are almost in line with the camera. This is the slowest of the filtering options, but results in the highest quality texturing. The anisotropic filtering level can be changed by adjusting :ref:`ProjectSettings.rendering/textures/default_filters/anisotropic_filtering_level<class_ProjectSettings_property_rendering/textures/default_filters/anisotropic_filtering_level>`.
+The texture filter blends between the nearest 4 pixels and blends between 2 mipmaps (or uses the nearest mipmap if :ref:`ProjectSettings.rendering/textures/default_filters/use_nearest_mipmap_filter<class_ProjectSettings_property_rendering/textures/default_filters/use_nearest_mipmap_filter>` is ``true``) based on the angle between the surface and the camera view. This makes the texture look smooth from up close, and smooth from a distance. Anisotropic filtering improves texture quality on surfaces that are almost in line with the camera, but is slightly slower. The anisotropic filtering level can be changed by adjusting :ref:`ProjectSettings.rendering/textures/default_filters/anisotropic_filtering_level<class_ProjectSettings_property_rendering/textures/default_filters/anisotropic_filtering_level>`.
 
-\ **Note:** This texture filter is rarely useful in 2D projects. :ref:`TEXTURE_FILTER_LINEAR_WITH_MIPMAPS<class_CanvasItem_constant_TEXTURE_FILTER_LINEAR_WITH_MIPMAPS>` is usually more appropriate.
+\ **Note:** This texture filter is rarely useful in 2D projects. :ref:`TEXTURE_FILTER_LINEAR_WITH_MIPMAPS<class_CanvasItem_constant_TEXTURE_FILTER_LINEAR_WITH_MIPMAPS>` is usually more appropriate in this case.
 
 .. _class_CanvasItem_constant_TEXTURE_FILTER_MAX:
 
@@ -465,7 +469,7 @@ The **CanvasItem**'s local transform has changed. This notification is only rece
 
 **NOTIFICATION_DRAW** = ``30``
 
-The **CanvasItem** is requested to draw (see :ref:`_draw<class_CanvasItem_method__draw>`).
+The **CanvasItem** is requested to draw (see :ref:`_draw<class_CanvasItem_private_method__draw>`).
 
 .. _class_CanvasItem_constant_NOTIFICATION_VISIBILITY_CHANGED:
 
@@ -776,7 +780,7 @@ Z index. Controls the order in which the nodes render. A node with a higher Z in
 Method Descriptions
 -------------------
 
-.. _class_CanvasItem_method__draw:
+.. _class_CanvasItem_private_method__draw:
 
 .. rst-class:: classref-method
 
@@ -784,7 +788,7 @@ void **_draw** **(** **)** |virtual|
 
 Called when **CanvasItem** has been requested to redraw (after :ref:`queue_redraw<class_CanvasItem_method_queue_redraw>` is called, either manually or by the engine).
 
-Corresponds to the :ref:`NOTIFICATION_DRAW<class_CanvasItem_constant_NOTIFICATION_DRAW>` notification in :ref:`Object._notification<class_Object_method__notification>`.
+Corresponds to the :ref:`NOTIFICATION_DRAW<class_CanvasItem_constant_NOTIFICATION_DRAW>` notification in :ref:`Object._notification<class_Object_private_method__notification>`.
 
 .. rst-class:: classref-item-separator
 
@@ -810,7 +814,7 @@ void **draw_arc** **(** :ref:`Vector2<class_Vector2>` center, :ref:`float<class_
 
 Draws an unfilled arc between the given angles with a uniform ``color`` and ``width`` and optional antialiasing (supported only for positive ``width``). The larger the value of ``point_count``, the smoother the curve. See also :ref:`draw_circle<class_CanvasItem_method_draw_circle>`.
 
-If ``width`` is negative, then the arc is drawn using :ref:`RenderingServer.PRIMITIVE_LINE_STRIP<class_RenderingServer_constant_PRIMITIVE_LINE_STRIP>`. This means that when the CanvasItem is scaled, the arc will remain thin. If this behavior is not desired, then pass a positive ``width`` like ``1.0``.
+If ``width`` is negative, it will be ignored and the arc will be drawn using :ref:`RenderingServer.PRIMITIVE_LINE_STRIP<class_RenderingServer_constant_PRIMITIVE_LINE_STRIP>`. This means that when the CanvasItem is scaled, the arc will remain thin. If this behavior is not desired, then pass a positive ``width`` like ``1.0``.
 
 The arc is drawn from ``start_angle`` towards the value of ``end_angle`` so in clockwise direction if ``start_angle < end_angle`` and counter-clockwise otherwise. Passing the same angles but in reversed order will produce the same arc. If absolute difference of ``start_angle`` and ``end_angle`` is greater than :ref:`@GDScript.TAU<class_@GDScript_constant_TAU>` radians, then a full circle arc is drawn (i.e. arc will not overlap itself).
 
@@ -1039,7 +1043,7 @@ void **draw_polyline** **(** :ref:`PackedVector2Array<class_PackedVector2Array>`
 
 Draws interconnected line segments with a uniform ``color`` and ``width`` and optional antialiasing (supported only for positive ``width``). When drawing large amounts of lines, this is faster than using individual :ref:`draw_line<class_CanvasItem_method_draw_line>` calls. To draw disconnected lines, use :ref:`draw_multiline<class_CanvasItem_method_draw_multiline>` instead. See also :ref:`draw_polygon<class_CanvasItem_method_draw_polygon>`.
 
-If ``width`` is negative, the polyline is drawn using :ref:`RenderingServer.PRIMITIVE_LINE_STRIP<class_RenderingServer_constant_PRIMITIVE_LINE_STRIP>`. This means that when the CanvasItem is scaled, the polyline will remain thin. If this behavior is not desired, then pass a positive ``width`` like ``1.0``.
+If ``width`` is negative, it will be ignored and the polyline will be drawn using :ref:`RenderingServer.PRIMITIVE_LINE_STRIP<class_RenderingServer_constant_PRIMITIVE_LINE_STRIP>`. This means that when the CanvasItem is scaled, the polyline will remain thin. If this behavior is not desired, then pass a positive ``width`` like ``1.0``.
 
 .. rst-class:: classref-item-separator
 
@@ -1053,7 +1057,7 @@ void **draw_polyline_colors** **(** :ref:`PackedVector2Array<class_PackedVector2
 
 Draws interconnected line segments with a uniform ``width``, point-by-point coloring, and optional antialiasing (supported only for positive ``width``). Colors assigned to line points match by index between ``points`` and ``colors``, i.e. each line segment is filled with a gradient between the colors of the endpoints. When drawing large amounts of lines, this is faster than using individual :ref:`draw_line<class_CanvasItem_method_draw_line>` calls. To draw disconnected lines, use :ref:`draw_multiline_colors<class_CanvasItem_method_draw_multiline_colors>` instead. See also :ref:`draw_polygon<class_CanvasItem_method_draw_polygon>`.
 
-If ``width`` is negative, then the polyline is drawn using :ref:`RenderingServer.PRIMITIVE_LINE_STRIP<class_RenderingServer_constant_PRIMITIVE_LINE_STRIP>`. This means that when the CanvasItem is scaled, the polyline will remain thin. If this behavior is not desired, then pass a positive ``width`` like ``1.0``.
+If ``width`` is negative, it will be ignored and the polyline will be drawn using :ref:`RenderingServer.PRIMITIVE_LINE_STRIP<class_RenderingServer_constant_PRIMITIVE_LINE_STRIP>`. This means that when the CanvasItem is scaled, the polyline will remain thin. If this behavior is not desired, then pass a positive ``width`` like ``1.0``.
 
 .. rst-class:: classref-item-separator
 
@@ -1428,7 +1432,7 @@ Returns ``true`` if global transform notifications are communicated to children.
 
 :ref:`bool<class_bool>` **is_visible_in_tree** **(** **)** |const|
 
-Returns ``true`` if the node is present in the :ref:`SceneTree<class_SceneTree>`, its :ref:`visible<class_CanvasItem_property_visible>` property is ``true`` and all its ancestors are also visible. If any ancestor is hidden, this node will not be visible in the scene tree, and is consequently not drawn (see :ref:`_draw<class_CanvasItem_method__draw>`).
+Returns ``true`` if the node is present in the :ref:`SceneTree<class_SceneTree>`, its :ref:`visible<class_CanvasItem_property_visible>` property is ``true`` and all its ancestors are also visible. If any ancestor is hidden, this node will not be visible in the scene tree, and is consequently not drawn (see :ref:`_draw<class_CanvasItem_private_method__draw>`).
 
 .. rst-class:: classref-item-separator
 
@@ -1478,7 +1482,7 @@ Internally, the node is moved to the bottom of parent's children list. The metho
 
 void **queue_redraw** **(** **)**
 
-Queues the **CanvasItem** to redraw. During idle time, if **CanvasItem** is visible, :ref:`NOTIFICATION_DRAW<class_CanvasItem_constant_NOTIFICATION_DRAW>` is sent and :ref:`_draw<class_CanvasItem_method__draw>` is called. This only occurs **once** per frame, even if this method has been called multiple times.
+Queues the **CanvasItem** to redraw. During idle time, if **CanvasItem** is visible, :ref:`NOTIFICATION_DRAW<class_CanvasItem_constant_NOTIFICATION_DRAW>` is sent and :ref:`_draw<class_CanvasItem_private_method__draw>` is called. This only occurs **once** per frame, even if this method has been called multiple times.
 
 .. rst-class:: classref-item-separator
 

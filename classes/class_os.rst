@@ -900,7 +900,7 @@ On the web, this is ``"Web"``.
         case "Linux":
         case "FreeBSD":
         case "NetBSD":
-        case "OpenBSD"
+        case "OpenBSD":
         case "BSD":
             GD.Print("Linux/BSD");
             break;
@@ -1089,7 +1089,7 @@ Returns a string that is unique to the device.
 
 \ **Note:** This string may change without notice if the user reinstalls/upgrades their operating system or changes their hardware. This means it should generally not be used to encrypt persistent data as the data saved before an unexpected ID change would become inaccessible. The returned string may also be falsified using external programs, so do not rely on the string returned by :ref:`get_unique_id<class_OS_method_get_unique_id>` for security purposes.
 
-\ **Note:** Returns an empty string on Web, as this method isn't implemented on this platform yet.
+\ **Note:** Returns an empty string and prints an error on Web, as this method cannot be implemented on this platform.
 
 .. rst-class:: classref-item-separator
 
@@ -1186,6 +1186,8 @@ Returns ``true`` if the feature for the given feature tag is supported in the cu
 \ **Note:** Tag names are case-sensitive.
 
 \ **Note:** On the web platform, one of the following additional tags is defined to indicate host platform: ``web_android``, ``web_ios``, ``web_linuxbsd``, ``web_macos``, or ``web_windows``.
+
+\ **Note:** On the iOS simulator, the additional ``simulator`` tag is defined.
 
 .. rst-class:: classref-item-separator
 
