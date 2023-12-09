@@ -124,17 +124,17 @@ Methods
    :widths: auto
 
    +---------------------------------------------------+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-   | void                                              | :ref:`_backspace<class_TextEdit_method__backspace>` **(** :ref:`int<class_int>` caret_index **)** |virtual|                                                                                                                                                           |
+   | void                                              | :ref:`_backspace<class_TextEdit_private_method__backspace>` **(** :ref:`int<class_int>` caret_index **)** |virtual|                                                                                                                                                   |
    +---------------------------------------------------+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-   | void                                              | :ref:`_copy<class_TextEdit_method__copy>` **(** :ref:`int<class_int>` caret_index **)** |virtual|                                                                                                                                                                     |
+   | void                                              | :ref:`_copy<class_TextEdit_private_method__copy>` **(** :ref:`int<class_int>` caret_index **)** |virtual|                                                                                                                                                             |
    +---------------------------------------------------+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-   | void                                              | :ref:`_cut<class_TextEdit_method__cut>` **(** :ref:`int<class_int>` caret_index **)** |virtual|                                                                                                                                                                       |
+   | void                                              | :ref:`_cut<class_TextEdit_private_method__cut>` **(** :ref:`int<class_int>` caret_index **)** |virtual|                                                                                                                                                               |
    +---------------------------------------------------+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-   | void                                              | :ref:`_handle_unicode_input<class_TextEdit_method__handle_unicode_input>` **(** :ref:`int<class_int>` unicode_char, :ref:`int<class_int>` caret_index **)** |virtual|                                                                                                 |
+   | void                                              | :ref:`_handle_unicode_input<class_TextEdit_private_method__handle_unicode_input>` **(** :ref:`int<class_int>` unicode_char, :ref:`int<class_int>` caret_index **)** |virtual|                                                                                         |
    +---------------------------------------------------+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-   | void                                              | :ref:`_paste<class_TextEdit_method__paste>` **(** :ref:`int<class_int>` caret_index **)** |virtual|                                                                                                                                                                   |
+   | void                                              | :ref:`_paste<class_TextEdit_private_method__paste>` **(** :ref:`int<class_int>` caret_index **)** |virtual|                                                                                                                                                           |
    +---------------------------------------------------+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-   | void                                              | :ref:`_paste_primary_clipboard<class_TextEdit_method__paste_primary_clipboard>` **(** :ref:`int<class_int>` caret_index **)** |virtual|                                                                                                                               |
+   | void                                              | :ref:`_paste_primary_clipboard<class_TextEdit_private_method__paste_primary_clipboard>` **(** :ref:`int<class_int>` caret_index **)** |virtual|                                                                                                                       |
    +---------------------------------------------------+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
    | :ref:`int<class_int>`                             | :ref:`add_caret<class_TextEdit_method_add_caret>` **(** :ref:`int<class_int>` line, :ref:`int<class_int>` col **)**                                                                                                                                                   |
    +---------------------------------------------------+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
@@ -1476,7 +1476,7 @@ Allow scrolling past the last line into "virtual" space.
 - void **set_smooth_scroll_enabled** **(** :ref:`bool<class_bool>` value **)**
 - :ref:`bool<class_bool>` **is_smooth_scroll_enabled** **(** **)**
 
-Scroll smoothly over the text rather then jumping to the next location.
+Scroll smoothly over the text rather than jumping to the next location.
 
 .. rst-class:: classref-item-separator
 
@@ -1676,7 +1676,7 @@ Sets the line wrapping mode to use.
 Method Descriptions
 -------------------
 
-.. _class_TextEdit_method__backspace:
+.. _class_TextEdit_private_method__backspace:
 
 .. rst-class:: classref-method
 
@@ -1688,7 +1688,7 @@ Override this method to define what happens when the user presses the backspace 
 
 ----
 
-.. _class_TextEdit_method__copy:
+.. _class_TextEdit_private_method__copy:
 
 .. rst-class:: classref-method
 
@@ -1700,7 +1700,7 @@ Override this method to define what happens when the user performs a copy operat
 
 ----
 
-.. _class_TextEdit_method__cut:
+.. _class_TextEdit_private_method__cut:
 
 .. rst-class:: classref-method
 
@@ -1712,7 +1712,7 @@ Override this method to define what happens when the user performs a cut operati
 
 ----
 
-.. _class_TextEdit_method__handle_unicode_input:
+.. _class_TextEdit_private_method__handle_unicode_input:
 
 .. rst-class:: classref-method
 
@@ -1724,7 +1724,7 @@ Override this method to define what happens when the user types in the provided 
 
 ----
 
-.. _class_TextEdit_method__paste:
+.. _class_TextEdit_private_method__paste:
 
 .. rst-class:: classref-method
 
@@ -1736,7 +1736,7 @@ Override this method to define what happens when the user performs a paste opera
 
 ----
 
-.. _class_TextEdit_method__paste_primary_clipboard:
+.. _class_TextEdit_private_method__paste_primary_clipboard:
 
 .. rst-class:: classref-method
 
@@ -1828,7 +1828,7 @@ Adjust the viewport so the caret is visible.
 
 void **backspace** **(** :ref:`int<class_int>` caret_index=-1 **)**
 
-Called when the user presses the backspace key. Can be overridden with :ref:`_backspace<class_TextEdit_method__backspace>`.
+Called when the user presses the backspace key. Can be overridden with :ref:`_backspace<class_TextEdit_private_method__backspace>`.
 
 .. rst-class:: classref-item-separator
 
@@ -1888,7 +1888,7 @@ Clears the undo history.
 
 void **copy** **(** :ref:`int<class_int>` caret_index=-1 **)**
 
-Copies the current text selection. Can be overridden with :ref:`_copy<class_TextEdit_method__copy>`.
+Copies the current text selection. Can be overridden with :ref:`_copy<class_TextEdit_private_method__copy>`.
 
 .. rst-class:: classref-item-separator
 
@@ -1900,7 +1900,7 @@ Copies the current text selection. Can be overridden with :ref:`_copy<class_Text
 
 void **cut** **(** :ref:`int<class_int>` caret_index=-1 **)**
 
-Cut's the current selection. Can be overridden with :ref:`_cut<class_TextEdit_method__cut>`.
+Cut's the current selection. Can be overridden with :ref:`_cut<class_TextEdit_private_method__cut>`.
 
 .. rst-class:: classref-item-separator
 
@@ -2927,7 +2927,7 @@ Merges any overlapping carets. Will favor the newest caret, or the caret with a 
 
 void **paste** **(** :ref:`int<class_int>` caret_index=-1 **)**
 
-Paste at the current location. Can be overridden with :ref:`_paste<class_TextEdit_method__paste>`.
+Paste at the current location. Can be overridden with :ref:`_paste<class_TextEdit_private_method__paste>`.
 
 .. rst-class:: classref-item-separator
 
@@ -3699,7 +3699,7 @@ Sets a custom :ref:`Texture2D<class_Texture2D>` for tab text characters.
 
 :ref:`StyleBox<class_StyleBox>` **focus**
 
-Sets the :ref:`StyleBox<class_StyleBox>` when in focus. The ``focus`` :ref:`StyleBox<class_StyleBox>` is displayed *over* the base :ref:`StyleBox<class_StyleBox>`, so a partially transparent :ref:`StyleBox<class_StyleBox>` should be used to ensure the base :ref:`StyleBox<class_StyleBox>` remains visible. A :ref:`StyleBox<class_StyleBox>` that represents an outline or an underline works well for this purpose. To disable the focus visual effect, assign a :ref:`StyleBoxEmpty<class_StyleBoxEmpty>` resource. Note that disabling the focus visual effect will harm keyboard/controller navigation usability, so this is not recommended for accessibility reasons.
+Sets the :ref:`StyleBox<class_StyleBox>` when in focus. The :ref:`focus<class_TextEdit_theme_style_focus>` :ref:`StyleBox<class_StyleBox>` is displayed *over* the base :ref:`StyleBox<class_StyleBox>`, so a partially transparent :ref:`StyleBox<class_StyleBox>` should be used to ensure the base :ref:`StyleBox<class_StyleBox>` remains visible. A :ref:`StyleBox<class_StyleBox>` that represents an outline or an underline works well for this purpose. To disable the focus visual effect, assign a :ref:`StyleBoxEmpty<class_StyleBoxEmpty>` resource. Note that disabling the focus visual effect will harm keyboard/controller navigation usability, so this is not recommended for accessibility reasons.
 
 .. rst-class:: classref-item-separator
 

@@ -569,6 +569,8 @@ Methods
    +----------------------------------------------------------------------------------+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
    | :ref:`int<class_int>`                                                            | :ref:`mesh_surface_get_format_attribute_stride<class_RenderingServer_method_mesh_surface_get_format_attribute_stride>` **(** |bitfield|\<:ref:`ArrayFormat<enum_RenderingServer_ArrayFormat>`\> format, :ref:`int<class_int>` vertex_count **)** |const|                                                                                                                                                                                                                                                                                                                                                                                                                           |
    +----------------------------------------------------------------------------------+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+   | :ref:`int<class_int>`                                                            | :ref:`mesh_surface_get_format_normal_tangent_stride<class_RenderingServer_method_mesh_surface_get_format_normal_tangent_stride>` **(** |bitfield|\<:ref:`ArrayFormat<enum_RenderingServer_ArrayFormat>`\> format, :ref:`int<class_int>` vertex_count **)** |const|                                                                                                                                                                                                                                                                                                                                                                                                                 |
+   +----------------------------------------------------------------------------------+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
    | :ref:`int<class_int>`                                                            | :ref:`mesh_surface_get_format_offset<class_RenderingServer_method_mesh_surface_get_format_offset>` **(** |bitfield|\<:ref:`ArrayFormat<enum_RenderingServer_ArrayFormat>`\> format, :ref:`int<class_int>` vertex_count, :ref:`int<class_int>` array_index **)** |const|                                                                                                                                                                                                                                                                                                                                                                                                            |
    +----------------------------------------------------------------------------------+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
    | :ref:`int<class_int>`                                                            | :ref:`mesh_surface_get_format_skin_stride<class_RenderingServer_method_mesh_surface_get_format_skin_stride>` **(** |bitfield|\<:ref:`ArrayFormat<enum_RenderingServer_ArrayFormat>`\> format, :ref:`int<class_int>` vertex_count **)** |const|                                                                                                                                                                                                                                                                                                                                                                                                                                     |
@@ -665,6 +667,8 @@ Methods
    +----------------------------------------------------------------------------------+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
    | void                                                                             | :ref:`particles_set_amount<class_RenderingServer_method_particles_set_amount>` **(** :ref:`RID<class_RID>` particles, :ref:`int<class_int>` amount **)**                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                           |
    +----------------------------------------------------------------------------------+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+   | void                                                                             | :ref:`particles_set_amount_ratio<class_RenderingServer_method_particles_set_amount_ratio>` **(** :ref:`RID<class_RID>` particles, :ref:`float<class_float>` ratio **)**                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            |
+   +----------------------------------------------------------------------------------+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
    | void                                                                             | :ref:`particles_set_collision_base_size<class_RenderingServer_method_particles_set_collision_base_size>` **(** :ref:`RID<class_RID>` particles, :ref:`float<class_float>` size **)**                                                                                                                                                                                                                                                                                                                                                                                                                                                                                               |
    +----------------------------------------------------------------------------------+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
    | void                                                                             | :ref:`particles_set_custom_aabb<class_RenderingServer_method_particles_set_custom_aabb>` **(** :ref:`RID<class_RID>` particles, :ref:`AABB<class_AABB>` aabb **)**                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                 |
@@ -677,6 +681,8 @@ Methods
    +----------------------------------------------------------------------------------+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
    | void                                                                             | :ref:`particles_set_emission_transform<class_RenderingServer_method_particles_set_emission_transform>` **(** :ref:`RID<class_RID>` particles, :ref:`Transform3D<class_Transform3D>` transform **)**                                                                                                                                                                                                                                                                                                                                                                                                                                                                                |
    +----------------------------------------------------------------------------------+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+   | void                                                                             | :ref:`particles_set_emitter_velocity<class_RenderingServer_method_particles_set_emitter_velocity>` **(** :ref:`RID<class_RID>` particles, :ref:`Vector3<class_Vector3>` velocity **)**                                                                                                                                                                                                                                                                                                                                                                                                                                                                                             |
+   +----------------------------------------------------------------------------------+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
    | void                                                                             | :ref:`particles_set_emitting<class_RenderingServer_method_particles_set_emitting>` **(** :ref:`RID<class_RID>` particles, :ref:`bool<class_bool>` emitting **)**                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                   |
    +----------------------------------------------------------------------------------+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
    | void                                                                             | :ref:`particles_set_explosiveness_ratio<class_RenderingServer_method_particles_set_explosiveness_ratio>` **(** :ref:`RID<class_RID>` particles, :ref:`float<class_float>` ratio **)**                                                                                                                                                                                                                                                                                                                                                                                                                                                                                              |
@@ -684,6 +690,8 @@ Methods
    | void                                                                             | :ref:`particles_set_fixed_fps<class_RenderingServer_method_particles_set_fixed_fps>` **(** :ref:`RID<class_RID>` particles, :ref:`int<class_int>` fps **)**                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        |
    +----------------------------------------------------------------------------------+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
    | void                                                                             | :ref:`particles_set_fractional_delta<class_RenderingServer_method_particles_set_fractional_delta>` **(** :ref:`RID<class_RID>` particles, :ref:`bool<class_bool>` enable **)**                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                     |
+   +----------------------------------------------------------------------------------+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+   | void                                                                             | :ref:`particles_set_interp_to_end<class_RenderingServer_method_particles_set_interp_to_end>` **(** :ref:`RID<class_RID>` particles, :ref:`float<class_float>` factor **)**                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                         |
    +----------------------------------------------------------------------------------+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
    | void                                                                             | :ref:`particles_set_interpolate<class_RenderingServer_method_particles_set_interpolate>` **(** :ref:`RID<class_RID>` particles, :ref:`bool<class_bool>` enable **)**                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                               |
    +----------------------------------------------------------------------------------+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
@@ -1596,7 +1604,63 @@ Flag used to mark that the array uses 8 bone weights instead of 4.
 
 :ref:`ArrayFormat<enum_RenderingServer_ArrayFormat>` **ARRAY_FLAG_USES_EMPTY_VERTEX_ARRAY** = ``268435456``
 
+Flag used to mark that the mesh does not have a vertex array and instead will infer vertex positions in the shader using indices and other information.
 
+.. _class_RenderingServer_constant_ARRAY_FLAG_COMPRESS_ATTRIBUTES:
+
+.. rst-class:: classref-enumeration-constant
+
+:ref:`ArrayFormat<enum_RenderingServer_ArrayFormat>` **ARRAY_FLAG_COMPRESS_ATTRIBUTES** = ``536870912``
+
+Flag used to mark that a mesh is using compressed attributes (vertices, normals, tangents, UVs). When this form of compression is enabled, vertex positions will be packed into an RGBA16UNORM attribute and scaled in the vertex shader. The normal and tangent will be packed into an RG16UNORM representing an axis, and a 16-bit float stored in the A-channel of the vertex. UVs will use 16-bit normalized floats instead of full 32-bit signed floats. When using this compression mode you must use either vertices, normals, and tangents or only vertices. You cannot use normals without tangents. Importers will automatically enable this compression if they can.
+
+.. _class_RenderingServer_constant_ARRAY_FLAG_FORMAT_VERSION_BASE:
+
+.. rst-class:: classref-enumeration-constant
+
+:ref:`ArrayFormat<enum_RenderingServer_ArrayFormat>` **ARRAY_FLAG_FORMAT_VERSION_BASE** = ``35``
+
+Flag used to mark the start of the bits used to store the mesh version.
+
+.. _class_RenderingServer_constant_ARRAY_FLAG_FORMAT_VERSION_SHIFT:
+
+.. rst-class:: classref-enumeration-constant
+
+:ref:`ArrayFormat<enum_RenderingServer_ArrayFormat>` **ARRAY_FLAG_FORMAT_VERSION_SHIFT** = ``35``
+
+Flag used to shift a mesh format int to bring the version into the lowest digits.
+
+.. _class_RenderingServer_constant_ARRAY_FLAG_FORMAT_VERSION_1:
+
+.. rst-class:: classref-enumeration-constant
+
+:ref:`ArrayFormat<enum_RenderingServer_ArrayFormat>` **ARRAY_FLAG_FORMAT_VERSION_1** = ``0``
+
+Flag used to record the format used by prior mesh versions before the introduction of a version.
+
+.. _class_RenderingServer_constant_ARRAY_FLAG_FORMAT_VERSION_2:
+
+.. rst-class:: classref-enumeration-constant
+
+:ref:`ArrayFormat<enum_RenderingServer_ArrayFormat>` **ARRAY_FLAG_FORMAT_VERSION_2** = ``34359738368``
+
+Flag used to record the second iteration of the mesh version flag. The primary difference between this and :ref:`ARRAY_FLAG_FORMAT_VERSION_1<class_RenderingServer_constant_ARRAY_FLAG_FORMAT_VERSION_1>` is that this version supports :ref:`ARRAY_FLAG_COMPRESS_ATTRIBUTES<class_RenderingServer_constant_ARRAY_FLAG_COMPRESS_ATTRIBUTES>` and in this version vertex positions are de-interleaved from normals and tangents.
+
+.. _class_RenderingServer_constant_ARRAY_FLAG_FORMAT_CURRENT_VERSION:
+
+.. rst-class:: classref-enumeration-constant
+
+:ref:`ArrayFormat<enum_RenderingServer_ArrayFormat>` **ARRAY_FLAG_FORMAT_CURRENT_VERSION** = ``34359738368``
+
+Flag used to record the current version that the engine expects. Currently this is the same as :ref:`ARRAY_FLAG_FORMAT_VERSION_2<class_RenderingServer_constant_ARRAY_FLAG_FORMAT_VERSION_2>`.
+
+.. _class_RenderingServer_constant_ARRAY_FLAG_FORMAT_VERSION_MASK:
+
+.. rst-class:: classref-enumeration-constant
+
+:ref:`ArrayFormat<enum_RenderingServer_ArrayFormat>` **ARRAY_FLAG_FORMAT_VERSION_MASK** = ``255``
+
+Flag used to isolate the bits used for mesh version after using :ref:`ARRAY_FLAG_FORMAT_VERSION_SHIFT<class_RenderingServer_constant_ARRAY_FLAG_FORMAT_VERSION_SHIFT>` to shift them into place.
 
 .. rst-class:: classref-item-separator
 
@@ -2468,7 +2532,7 @@ Draw particles in the order that they appear in the particles array.
 
 :ref:`ParticlesDrawOrder<enum_RenderingServer_ParticlesDrawOrder>` **PARTICLES_DRAW_ORDER_LIFETIME** = ``1``
 
-Sort particles based on their lifetime.
+Sort particles based on their lifetime. In other words, the particle with the highest lifetime is drawn at the front.
 
 .. _class_RenderingServer_constant_PARTICLES_DRAW_ORDER_REVERSE_LIFETIME:
 
@@ -2476,7 +2540,7 @@ Sort particles based on their lifetime.
 
 :ref:`ParticlesDrawOrder<enum_RenderingServer_ParticlesDrawOrder>` **PARTICLES_DRAW_ORDER_REVERSE_LIFETIME** = ``2``
 
-
+Sort particles based on the inverse of their lifetime. In other words, the particle with the lowest lifetime is drawn at the front.
 
 .. _class_RenderingServer_constant_PARTICLES_DRAW_ORDER_VIEW_DEPTH:
 
@@ -2702,11 +2766,19 @@ Use bilinear scaling for the viewport's 3D buffer. The amount of scaling can be 
 
 Use AMD FidelityFX Super Resolution 1.0 upscaling for the viewport's 3D buffer. The amount of scaling can be set using :ref:`Viewport.scaling_3d_scale<class_Viewport_property_scaling_3d_scale>`. Values less than ``1.0`` will be result in the viewport being upscaled using FSR. Values greater than ``1.0`` are not supported and bilinear downsampling will be used instead. A value of ``1.0`` disables scaling.
 
+.. _class_RenderingServer_constant_VIEWPORT_SCALING_3D_MODE_FSR2:
+
+.. rst-class:: classref-enumeration-constant
+
+:ref:`ViewportScaling3DMode<enum_RenderingServer_ViewportScaling3DMode>` **VIEWPORT_SCALING_3D_MODE_FSR2** = ``2``
+
+Use AMD FidelityFX Super Resolution 2.2 upscaling for the viewport's 3D buffer. The amount of scaling can be set using :ref:`Viewport.scaling_3d_scale<class_Viewport_property_scaling_3d_scale>`. Values less than ``1.0`` will be result in the viewport being upscaled using FSR2. Values greater than ``1.0`` are not supported and bilinear downsampling will be used instead. A value of ``1.0`` will use FSR2 at native resolution as a TAA solution.
+
 .. _class_RenderingServer_constant_VIEWPORT_SCALING_3D_MODE_MAX:
 
 .. rst-class:: classref-enumeration-constant
 
-:ref:`ViewportScaling3DMode<enum_RenderingServer_ViewportScaling3DMode>` **VIEWPORT_SCALING_3D_MODE_MAX** = ``2``
+:ref:`ViewportScaling3DMode<enum_RenderingServer_ViewportScaling3DMode>` **VIEWPORT_SCALING_3D_MODE_MAX** = ``3``
 
 Represents the size of the :ref:`ViewportScaling3DMode<enum_RenderingServer_ViewportScaling3DMode>` enum.
 
@@ -3345,6 +3417,14 @@ Draws the occlusion culling buffer. This low-resolution occlusion culling buffer
 :ref:`ViewportDebugDraw<enum_RenderingServer_ViewportDebugDraw>` **VIEWPORT_DEBUG_DRAW_MOTION_VECTORS** = ``25``
 
 Draws the motion vectors buffer. This is used by temporal antialiasing to correct for motion that occurs during gameplay.
+
+.. _class_RenderingServer_constant_VIEWPORT_DEBUG_DRAW_INTERNAL_BUFFER:
+
+.. rst-class:: classref-enumeration-constant
+
+:ref:`ViewportDebugDraw<enum_RenderingServer_ViewportDebugDraw>` **VIEWPORT_DEBUG_DRAW_INTERNAL_BUFFER** = ``26``
+
+Internal buffer is drawn instead of regular scene so you can see the per-pixel output that will be used by post-processing effects.
 
 .. rst-class:: classref-item-separator
 
@@ -4550,7 +4630,7 @@ Uses the default filter mode for this :ref:`Viewport<class_Viewport>`.
 
 :ref:`CanvasItemTextureFilter<enum_RenderingServer_CanvasItemTextureFilter>` **CANVAS_ITEM_TEXTURE_FILTER_NEAREST** = ``1``
 
-The texture filter reads from the nearest pixel only. The simplest and fastest method of filtering, but the texture will look pixelized.
+The texture filter reads from the nearest pixel only. This makes the texture look pixelated from up close, and grainy from a distance (due to mipmaps not being sampled).
 
 .. _class_RenderingServer_constant_CANVAS_ITEM_TEXTURE_FILTER_LINEAR:
 
@@ -4558,7 +4638,7 @@ The texture filter reads from the nearest pixel only. The simplest and fastest m
 
 :ref:`CanvasItemTextureFilter<enum_RenderingServer_CanvasItemTextureFilter>` **CANVAS_ITEM_TEXTURE_FILTER_LINEAR** = ``2``
 
-The texture filter blends between the nearest 4 pixels. Use this when you want to avoid a pixelated style, but do not want mipmaps.
+The texture filter blends between the nearest 4 pixels. This makes the texture look smooth from up close, and grainy from a distance (due to mipmaps not being sampled).
 
 .. _class_RenderingServer_constant_CANVAS_ITEM_TEXTURE_FILTER_NEAREST_WITH_MIPMAPS:
 
@@ -4566,7 +4646,9 @@ The texture filter blends between the nearest 4 pixels. Use this when you want t
 
 :ref:`CanvasItemTextureFilter<enum_RenderingServer_CanvasItemTextureFilter>` **CANVAS_ITEM_TEXTURE_FILTER_NEAREST_WITH_MIPMAPS** = ``3``
 
-The texture filter reads from the nearest pixel in the nearest mipmap. The fastest way to read from textures with mipmaps.
+The texture filter reads from the nearest pixel and blends between the nearest 2 mipmaps (or uses the nearest mipmap if :ref:`ProjectSettings.rendering/textures/default_filters/use_nearest_mipmap_filter<class_ProjectSettings_property_rendering/textures/default_filters/use_nearest_mipmap_filter>` is ``true``). This makes the texture look pixelated from up close, and smooth from a distance.
+
+Use this for non-pixel art textures that may be viewed at a low scale (e.g. due to :ref:`Camera2D<class_Camera2D>` zoom or sprite scaling), as mipmaps are important to smooth out pixels that are smaller than on-screen pixels.
 
 .. _class_RenderingServer_constant_CANVAS_ITEM_TEXTURE_FILTER_LINEAR_WITH_MIPMAPS:
 
@@ -4574,7 +4656,9 @@ The texture filter reads from the nearest pixel in the nearest mipmap. The faste
 
 :ref:`CanvasItemTextureFilter<enum_RenderingServer_CanvasItemTextureFilter>` **CANVAS_ITEM_TEXTURE_FILTER_LINEAR_WITH_MIPMAPS** = ``4``
 
-The texture filter blends between the nearest 4 pixels and between the nearest 2 mipmaps.
+The texture filter blends between the nearest 4 pixels and between the nearest 2 mipmaps (or uses the nearest mipmap if :ref:`ProjectSettings.rendering/textures/default_filters/use_nearest_mipmap_filter<class_ProjectSettings_property_rendering/textures/default_filters/use_nearest_mipmap_filter>` is ``true``). This makes the texture look smooth from up close, and smooth from a distance.
+
+Use this for non-pixel art textures that may be viewed at a low scale (e.g. due to :ref:`Camera2D<class_Camera2D>` zoom or sprite scaling), as mipmaps are important to smooth out pixels that are smaller than on-screen pixels.
 
 .. _class_RenderingServer_constant_CANVAS_ITEM_TEXTURE_FILTER_NEAREST_WITH_MIPMAPS_ANISOTROPIC:
 
@@ -4582,7 +4666,9 @@ The texture filter blends between the nearest 4 pixels and between the nearest 2
 
 :ref:`CanvasItemTextureFilter<enum_RenderingServer_CanvasItemTextureFilter>` **CANVAS_ITEM_TEXTURE_FILTER_NEAREST_WITH_MIPMAPS_ANISOTROPIC** = ``5``
 
-The texture filter reads from the nearest pixel, but selects a mipmap based on the angle between the surface and the camera view. This reduces artifacts on surfaces that are almost in line with the camera.
+The texture filter reads from the nearest pixel and blends between 2 mipmaps (or uses the nearest mipmap if :ref:`ProjectSettings.rendering/textures/default_filters/use_nearest_mipmap_filter<class_ProjectSettings_property_rendering/textures/default_filters/use_nearest_mipmap_filter>` is ``true``) based on the angle between the surface and the camera view. This makes the texture look pixelated from up close, and smooth from a distance. Anisotropic filtering improves texture quality on surfaces that are almost in line with the camera, but is slightly slower. The anisotropic filtering level can be changed by adjusting :ref:`ProjectSettings.rendering/textures/default_filters/anisotropic_filtering_level<class_ProjectSettings_property_rendering/textures/default_filters/anisotropic_filtering_level>`.
+
+\ **Note:** This texture filter is rarely useful in 2D projects. :ref:`CANVAS_ITEM_TEXTURE_FILTER_NEAREST_WITH_MIPMAPS<class_RenderingServer_constant_CANVAS_ITEM_TEXTURE_FILTER_NEAREST_WITH_MIPMAPS>` is usually more appropriate in this case.
 
 .. _class_RenderingServer_constant_CANVAS_ITEM_TEXTURE_FILTER_LINEAR_WITH_MIPMAPS_ANISOTROPIC:
 
@@ -4590,7 +4676,9 @@ The texture filter reads from the nearest pixel, but selects a mipmap based on t
 
 :ref:`CanvasItemTextureFilter<enum_RenderingServer_CanvasItemTextureFilter>` **CANVAS_ITEM_TEXTURE_FILTER_LINEAR_WITH_MIPMAPS_ANISOTROPIC** = ``6``
 
-The texture filter blends between the nearest 4 pixels and selects a mipmap based on the angle between the surface and the camera view. This reduces artifacts on surfaces that are almost in line with the camera. This is the slowest of the filtering options, but results in the highest quality texturing.
+The texture filter blends between the nearest 4 pixels and blends between 2 mipmaps (or uses the nearest mipmap if :ref:`ProjectSettings.rendering/textures/default_filters/use_nearest_mipmap_filter<class_ProjectSettings_property_rendering/textures/default_filters/use_nearest_mipmap_filter>` is ``true``) based on the angle between the surface and the camera view. This makes the texture look smooth from up close, and smooth from a distance. Anisotropic filtering improves texture quality on surfaces that are almost in line with the camera, but is slightly slower. The anisotropic filtering level can be changed by adjusting :ref:`ProjectSettings.rendering/textures/default_filters/anisotropic_filtering_level<class_ProjectSettings_property_rendering/textures/default_filters/anisotropic_filtering_level>`.
+
+\ **Note:** This texture filter is rarely useful in 2D projects. :ref:`CANVAS_ITEM_TEXTURE_FILTER_LINEAR_WITH_MIPMAPS<class_RenderingServer_constant_CANVAS_ITEM_TEXTURE_FILTER_LINEAR_WITH_MIPMAPS>` is usually more appropriate in this case.
 
 .. _class_RenderingServer_constant_CANVAS_ITEM_TEXTURE_FILTER_MAX:
 
@@ -7158,7 +7246,7 @@ Sets the size of the fog volume when shape is :ref:`FOG_VOLUME_SHAPE_ELLIPSOID<c
 
 void **force_draw** **(** :ref:`bool<class_bool>` swap_buffers=true, :ref:`float<class_float>` frame_step=0.0 **)**
 
-Forces redrawing of all viewports at once.
+Forces redrawing of all viewports at once. Must be called from the main thread.
 
 .. rst-class:: classref-item-separator
 
@@ -8528,9 +8616,19 @@ Returns a mesh's surface's arrays for blend shapes.
 
 :ref:`int<class_int>` **mesh_surface_get_format_attribute_stride** **(** |bitfield|\<:ref:`ArrayFormat<enum_RenderingServer_ArrayFormat>`\> format, :ref:`int<class_int>` vertex_count **)** |const|
 
-.. container:: contribute
+Returns the stride of the attribute buffer for a mesh with given ``format``.
 
-	There is currently no description for this method. Please help us by :ref:`contributing one <doc_updating_the_class_reference>`!
+.. rst-class:: classref-item-separator
+
+----
+
+.. _class_RenderingServer_method_mesh_surface_get_format_normal_tangent_stride:
+
+.. rst-class:: classref-method
+
+:ref:`int<class_int>` **mesh_surface_get_format_normal_tangent_stride** **(** |bitfield|\<:ref:`ArrayFormat<enum_RenderingServer_ArrayFormat>`\> format, :ref:`int<class_int>` vertex_count **)** |const|
+
+Returns the stride of the combined normals and tangents for a mesh with given ``format``. Note importantly that, while normals and tangents are in the vertex buffer with vertices, they are only interleaved with each other and so have a different stride than vertex positions.
 
 .. rst-class:: classref-item-separator
 
@@ -8542,9 +8640,7 @@ Returns a mesh's surface's arrays for blend shapes.
 
 :ref:`int<class_int>` **mesh_surface_get_format_offset** **(** |bitfield|\<:ref:`ArrayFormat<enum_RenderingServer_ArrayFormat>`\> format, :ref:`int<class_int>` vertex_count, :ref:`int<class_int>` array_index **)** |const|
 
-.. container:: contribute
-
-	There is currently no description for this method. Please help us by :ref:`contributing one <doc_updating_the_class_reference>`!
+Returns the offset of a given attribute by ``array_index`` in the start of its respective buffer.
 
 .. rst-class:: classref-item-separator
 
@@ -8556,9 +8652,7 @@ Returns a mesh's surface's arrays for blend shapes.
 
 :ref:`int<class_int>` **mesh_surface_get_format_skin_stride** **(** |bitfield|\<:ref:`ArrayFormat<enum_RenderingServer_ArrayFormat>`\> format, :ref:`int<class_int>` vertex_count **)** |const|
 
-.. container:: contribute
-
-	There is currently no description for this method. Please help us by :ref:`contributing one <doc_updating_the_class_reference>`!
+Returns the stride of the skin buffer for a mesh with given ``format``.
 
 .. rst-class:: classref-item-separator
 
@@ -8570,9 +8664,7 @@ Returns a mesh's surface's arrays for blend shapes.
 
 :ref:`int<class_int>` **mesh_surface_get_format_vertex_stride** **(** |bitfield|\<:ref:`ArrayFormat<enum_RenderingServer_ArrayFormat>`\> format, :ref:`int<class_int>` vertex_count **)** |const|
 
-.. container:: contribute
-
-	There is currently no description for this method. Please help us by :ref:`contributing one <doc_updating_the_class_reference>`!
+Returns the stride of the vertex positions for a mesh with given ``format``. Note importantly that vertex positions are stored consecutively and are not interleaved with the other attributes in the vertex buffer (normals and tangents).
 
 .. rst-class:: classref-item-separator
 
@@ -9169,6 +9261,18 @@ Sets the number of particles to be drawn and allocates the memory for them. Equi
 
 ----
 
+.. _class_RenderingServer_method_particles_set_amount_ratio:
+
+.. rst-class:: classref-method
+
+void **particles_set_amount_ratio** **(** :ref:`RID<class_RID>` particles, :ref:`float<class_float>` ratio **)**
+
+Sets the amount ratio for particles to be emitted. Equivalent to :ref:`GPUParticles3D.amount_ratio<class_GPUParticles3D_property_amount_ratio>`.
+
+.. rst-class:: classref-item-separator
+
+----
+
 .. _class_RenderingServer_method_particles_set_collision_base_size:
 
 .. rst-class:: classref-method
@@ -9243,6 +9347,18 @@ Sets the :ref:`Transform3D<class_Transform3D>` that will be used by the particle
 
 ----
 
+.. _class_RenderingServer_method_particles_set_emitter_velocity:
+
+.. rst-class:: classref-method
+
+void **particles_set_emitter_velocity** **(** :ref:`RID<class_RID>` particles, :ref:`Vector3<class_Vector3>` velocity **)**
+
+Sets the velocity of a particle node, that will be used by :ref:`ParticleProcessMaterial.inherit_velocity_ratio<class_ParticleProcessMaterial_property_inherit_velocity_ratio>`.
+
+.. rst-class:: classref-item-separator
+
+----
+
 .. _class_RenderingServer_method_particles_set_emitting:
 
 .. rst-class:: classref-method
@@ -9286,6 +9402,18 @@ Sets the frame rate that the particle system rendering will be fixed to. Equival
 void **particles_set_fractional_delta** **(** :ref:`RID<class_RID>` particles, :ref:`bool<class_bool>` enable **)**
 
 If ``true``, uses fractional delta which smooths the movement of the particles. Equivalent to :ref:`GPUParticles3D.fract_delta<class_GPUParticles3D_property_fract_delta>`.
+
+.. rst-class:: classref-item-separator
+
+----
+
+.. _class_RenderingServer_method_particles_set_interp_to_end:
+
+.. rst-class:: classref-method
+
+void **particles_set_interp_to_end** **(** :ref:`RID<class_RID>` particles, :ref:`float<class_float>` factor **)**
+
+Sets the value that informs a :ref:`ParticleProcessMaterial<class_ParticleProcessMaterial>` to rush all particles towards the end of their lifetime.
 
 .. rst-class:: classref-item-separator
 
